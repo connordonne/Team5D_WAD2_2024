@@ -4,4 +4,5 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse("Hello, placeholder for Team 5D project")
+    context_dict = {'message': 'Placeholder for the Team 5D Ratearant homepage'}
+    return render(request, 'ratearant/index.html', context=context_dict)

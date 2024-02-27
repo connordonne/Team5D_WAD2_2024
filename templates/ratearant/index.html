@@ -1,11 +1,13 @@
+{% load static %}
 <!DOCTYPE html>
-Templates and Media Files 47
 <html>
+<link rel="stylesheet" href="{% static 'styles.css' %}">
     <head> <title>Rate-A-Rant</title>
     </head>
     <body>
-    <h1>Title</h1> <div>
-
+    <h1>Title</h1> <div class="pTextBlue">
+    <br/>
+        <img src="{% static 'images/ratearanticon.jpeg' %}" alt="Site icon" style="width: 100px; height: 100px;"/>
     <strong>{{ message }}</strong><br /> </div>
 
     </body>

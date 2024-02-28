@@ -1,0 +1,28 @@
+<!DOCTYPE>
+{% load static %}
+<html>
+    <link rel="stylesheet" href="{% static 'ratearant/styles.css' %}">
+    <head>
+        <title>
+            Rate-A-Rant
+            {% block block_title %}
+            {% endblock %}
+        </title>
+    </head>
+
+<body>
+    <header class="header">
+        <img src="{% static 'ratearant/images/ratearanticon.jpeg' %}" alt="Site icon" style="width: 100px; height: 100px;"/>
+    </header>
+    <hr/>
+    <div>
+        {% block body_block %}
+        {% endblock %}
+    </div>
+    <hr/>
+    <footer class="footer">
+       {% block block_footer %}
+       {% endblock %}
+    </footer>
+</body>
+</html>

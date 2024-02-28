@@ -7,3 +7,16 @@
 #titleGreen {
     color: green;
 }
+
+.header{
+    background-color: #5c0002;
+    padding: 15px;
+
+}
+.footer{
+    background-color: #95090d;
+    padding: 20px;
+}
+a:visited{
+    color: aliceblue;
+}

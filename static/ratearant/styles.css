@@ -10,12 +10,12 @@
 
 .headerRAR{
     background-color: white;
-    padding: 10px;
+    padding: 5px;
     color: black;
 }
 .headerRAR1{
     background-color: #95090d;
-    padding: 10px;
+    padding: 5px;
 }
 .footer{
     background-color: #95090d;
@@ -26,4 +26,15 @@
 }
 #headerVisitedRAR a:visited{
     color: black;
+}
+.headerLinks{
+    color: white;
+}
+.footerLinks{
+    display: flex;
+    justify-content: space-between;
+}
+.footerLinks a{
+    color: white;
+    text-decoration: none;
 }

@@ -2,15 +2,13 @@
 {% load static %}
 
 {% block block_title %}
-    Index Page
+    Trending Page
 {% endblock %}
 
 {% block body_block %}
-    <div class="pTextBlue">
-    <p>{{ message }}</p>
-    </div>
+
 {% endblock %}
 
 {% block block_footer %}
-
+    <li><a href="{% url 'ratearant:home' %}">Index</a>
 {% endblock %}

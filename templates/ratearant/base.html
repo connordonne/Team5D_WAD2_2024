@@ -11,8 +11,12 @@
     </head>
 
 <body>
-    <header class="header">
+    <header class="headerRAR1" id="headerVisitedRAR1">
         <img src="{% static 'ratearant/images/ratearanticon.jpeg' %}" alt="Site icon" style="width: 100px; height: 100px;"/>
+        <a href="{% url 'ratearant:register' %}">Register</a>
+        <a href="{% url 'ratearant:login' %}">Login</a>
+        {% block block_header %}
+        {% endblock %}
     </header>
     <hr/>
     <div>
@@ -21,6 +25,11 @@
     </div>
     <hr/>
     <footer class="footer">
+        {% if isHomePage %}
+            <li><a href="{% url 'ratearant:about' %}">About</a></li>
+        {% else %}
+            <li><a href="{% url 'ratearant:home' %}">Home</a></li>
+        {% endif %}
        {% block block_footer %}
        {% endblock %}
     </footer>

@@ -8,15 +8,22 @@
     color: green;
 }
 
-.header{
-    background-color: #5c0002;
-    padding: 15px;
-
+.headerRAR{
+    background-color: white;
+    padding: 10px;
+    color: black;
+}
+.headerRAR1{
+    background-color: #95090d;
+    padding: 10px;
 }
 .footer{
     background-color: #95090d;
     padding: 20px;
 }
-a:visited{
+#headerVisitedRAR1 a:visited{
     color: aliceblue;
+}
+#headerVisitedRAR a:visited{
+    color: black;
 }

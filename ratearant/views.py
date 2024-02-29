@@ -11,7 +11,8 @@ def home(request):
 
 
 def about(request):
-    context_dict = {'message': 'Placeholder for the Team 5D Rate-A-Rant About page'}
+    context_dict = {'message': 'Placeholder for the Team 5D Rate-A-Rant About page',
+                    'isAboutPage': True}
     return render(request, 'ratearant/about.html', context=context_dict)
 
 

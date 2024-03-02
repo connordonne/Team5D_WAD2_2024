@@ -10,10 +10,10 @@ function changeImage(){
     imageOne.src="/static/ratearant/images/th.jpg";
 }
 
-// function to change the image back
+// function to change the image back, not in used for now
 function revertImage(){
     // Select the image again
     var imageOne=document.getElementById("img1");
     // change to the original image
-    imageOne.src="{% static 'ratearant/images/ratearanticon.jpeg' %}"
+    imageOne.src="/static/ratearant/images/ratearant.jpeg";
 }

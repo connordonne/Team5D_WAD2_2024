@@ -1,6 +1,8 @@
 from django.contrib import admin
-from .models import Cuisine, restaurant
+from ratearant.models import Cuisine, Restaurant, User
+
 # Register your models here.
 
 admin.site.register(Cuisine)
-admin.site.register(restaurant)
+admin.site.register(Restaurant)
+admin.site.register(User)

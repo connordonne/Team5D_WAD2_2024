@@ -36,3 +36,37 @@ class User(models.Model):
 
     def __str__(self):
         return self.username
+
+# Table for the reviews.
+class Review(models.Model):
+    reviewId = models.AutoField(primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+    message = models.TextField()
+    likes = models.IntegerField(default=0)
+    averageScore = models.DecimalField(max_digits=3, decimal_places=1)
+
+    def __str__(self):
+        return self.reviewId
+
+# Table for the comments on reviews.
+class Comment(models.Model):
+    commentId = models.AutoField(primary_key=True)
+    review = models.ForeignKey(Review, related_name='comments', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    message = models.TextField()
+    likes = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.commentId
+
+# Table for the scores given by users.
+class Score(models.Model):
+    review = models.ForeignKey(Review, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    foodRating = models.IntegerField()
+    serviceRating = models.IntegerField()
+    overallRating = models.IntegerField()
+
+    def __str__(self):
+        return self.review

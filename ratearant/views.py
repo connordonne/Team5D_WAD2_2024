@@ -20,6 +20,7 @@ def register(request):
     context_dict = {'message': 'Placeholder for the Team 5D Rate-A-Rant Register page'}
     return render(request, 'ratearant/register.html', context=context_dict)
 
+
 def login(request):
     context_dict = {'message': 'Placeholder for the Team 5D Rate-A-Rant Login page'}
     return render(request, 'ratearant/login.html', context=context_dict)

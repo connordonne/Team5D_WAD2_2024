@@ -1,4 +1,6 @@
 from django.db import models
+
+
 # Create your models here.
 
 # Table for the cuisine type.
@@ -17,7 +19,7 @@ class Restaurant(models.Model):
     address = models.CharField(max_length=256)
     phone = models.CharField(max_length=16)
     website = models.URLField()
-    openingTime = models.TimeField()
+    openingTime = models.CharField(max_length=30)
     priceRange = models.CharField(max_length=16)
     cuisine = models.ForeignKey(Cuisine, on_delete=models.CASCADE)
 
@@ -37,6 +39,7 @@ class User(models.Model):
     def __str__(self):
         return self.username
 
+
 # Table for the reviews.
 class Review(models.Model):
     reviewId = models.AutoField(primary_key=True)
@@ -49,6 +52,7 @@ class Review(models.Model):
     def __str__(self):
         return self.reviewId
 
+
 # Table for the comments on reviews.
 class Comment(models.Model):
     commentId = models.AutoField(primary_key=True)
@@ -59,6 +63,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.commentId
+
 
 # Table for the scores given by users.
 class Score(models.Model):

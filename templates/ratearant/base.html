@@ -29,8 +29,12 @@
             <li><a href="#" class="nav-link px-2" style="color: white"><h2>Restaurants</h2></a></li>
         </ul>
         <div class="text-end">
-        <button type="button" onclick="location.href='{% url 'ratearant:login' %}';" class="btn btn-outline-primary me-2">Login</button>
-            <button type="button" onclick="location.href='{% url 'ratearant:register' %}';" class="btn btn-primary">Register</button>
+            {% if user.is_authenticated %}
+                <button type="button" onclick="location.href='{% url 'ratearant:logout' %}';" class="btn btn-outline-primary me-2">Logout</button>
+            {% else %}
+                <button type="button" onclick="location.href='{% url 'ratearant:login' %}';" class="btn btn-outline-primary me-2">Login</button>
+                <button type="button" onclick="location.href='{% url 'ratearant:register' %}';" class="btn btn-primary">Register</button>
+            {% endif %}
         </div>
       </div>
     </div>

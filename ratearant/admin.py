@@ -1,6 +1,8 @@
 from django.contrib import admin
 from ratearant.models import Cuisine, Restaurant, User, Review, Comment, Score
 
+#user login and logout
+from ratearant.models import UserProfile
 
 # Register your models here.
 # add the cuisineID on the admin page
@@ -18,3 +20,6 @@ admin.site.register(User)
 admin.site.register(Review)
 admin.site.register(Comment)
 admin.site.register(Score)
+
+#user login and logout
+admin.site.register(UserProfile)

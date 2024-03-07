@@ -19,7 +19,7 @@
 
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <img src="{% static 'ratearant/images/ratearanticon.jpeg' %}" id="img1" alt="Site icon" style="width: 130px; height: 130px;" onclick="changeImage()"/>
+        <img src="{% static 'ratearant/images/ratearanticon.jpeg' %}" id="changeImage" alt="Site icon" style="width: 130px; height: 130px;" onclick="changeImage()"/>
         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
           <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
         </a>
@@ -30,10 +30,10 @@
         </ul>
         <div class="text-end">
             {% if user.is_authenticated %}
-                <button type="button" onclick="location.href='{% url 'ratearant:logout' %}';" class="btn btn-outline-primary me-2">Logout</button>
+                <button type="button" onclick="location.href='{% url 'ratearant:logout' %}';" class="btn btn-light me-2">Logout</button>
             {% else %}
-                <button type="button" onclick="location.href='{% url 'ratearant:login' %}';" class="btn btn-outline-primary me-2">Login</button>
-                <button type="button" onclick="location.href='{% url 'ratearant:register' %}';" class="btn btn-primary">Register</button>
+                <button type="button" onclick="location.href='{% url 'ratearant:login' %}';" class="btn btn-light me-2">Login</button>
+                <button type="button" onclick="location.href='{% url 'ratearant:register' %}';" class="btn btn-light">Register</button>
             {% endif %}
         </div>
       </div>

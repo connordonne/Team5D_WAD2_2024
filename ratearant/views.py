@@ -1,5 +1,14 @@
 from django.shortcuts import render
 
+#User login and logout
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import render, redirect
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+from django.urls import reverse
+from django.http import HttpResponse
+from ratearant.forms import UserForm
 
 # Create your views here.
 
@@ -14,13 +23,57 @@ def about(request):
     context_dict = {'message': 'Placeholder for the Team 5D Rate-A-Rant About page',
                     'isAboutPage': True}
     return render(request, 'ratearant/about.html', context=context_dict)
+    
+#User login
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
+        user = authenticate(username=username, password=password)
+
+        if user:
+            if user.is_active:
+                login(request, user)
+                return redirect(reverse('ratearant:home'))
+            else:
+                return HttpResponse("Your user account is disabled.")
+    else:
+        return render(request, 'ratearant/login.html')
+
+#User logout
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect('ratearant:home')
 
 def register(request):
-    context_dict = {'message': 'Placeholder for the Team 5D Rate-A-Rant Register page'}
-    return render(request, 'ratearant/register.html', context=context_dict)
+    registered = False
 
+    if request.method == 'POST':
+        user_form = UserForm(request.POST)
 
-def login(request):
-    context_dict = {'message': 'Placeholder for the Team 5D Rate-A-Rant Login page'}
-    return render(request, 'ratearant/login.html', context=context_dict)
+        if user_form.is_valid():
+            user = user_form.save()
+
+            user.set_password(user.password)
+            user.save()
+            registered = True
+        else:
+            print(user_form.errors)
+
+    else:
+        user_form = UserForm()
+    return render(request, 
+                  'ratearant/register.html', 
+                  context = {'user_form': user_form, 
+                             'registered': registered})
+
+#User delete
+"""
+@login_required
+def delete_account(request):
+    user = get_user_model().objects.get(username=request.user.username)
+    user.delete()
+    return redirect('ratearant:home')
+"""

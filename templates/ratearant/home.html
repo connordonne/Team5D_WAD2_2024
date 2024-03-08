@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block block_title %}
-    Index Page
+    Home Page
 {% endblock %}
 
 {% block block_header %}
@@ -25,7 +25,7 @@
           </div>
           <img src="https://t3.ftcdn.net/jpg/06/78/48/94/360_F_678489461_3A71gTirz0O4paWtpKPYhXfNyz74Ut62.jpg" class="star">
           <p class="card-text">{{ restaurant.address }}</p>
-          <a href="/command/1/color" class="btn btn-primary">See More</a>
+          <a href="/ratearant/restaurant/{{ restaurant.slug }}/" class="btn btn-primary">See More</a>
           <a href="/command/1/delete" class="btn btn-primary">Review</a>
         </div>
     </div>

@@ -29,4 +29,4 @@
             counter = 0;
         }
     }
-
+setInterval(changeImage, 2000);

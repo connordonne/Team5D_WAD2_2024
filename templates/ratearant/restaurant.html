@@ -1,0 +1,19 @@
+{% extends 'ratearant/base.html' %}
+{% load static %}
+
+{% block block_title %}
+    {% if restaurant %}
+    {{ restaurant.name }} - Ratearant
+    {% else %}
+    <p>Restaurant not found</p>
+    {% endif %}
+{% endblock %}
+
+{% block body_block %}
+	{% if restaurant %}
+		<P>{{ restaurant.name }}</P>
+        <P>{{ restaurant.address }}</P>
+        <P>{{ restaurant.phone }}</P>
+        <P>{{ restaurant.email }}</P>
+	{% endif %}
+{% endblock %}

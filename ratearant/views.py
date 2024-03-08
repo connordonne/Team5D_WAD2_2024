@@ -9,13 +9,20 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import HttpResponse
 from ratearant.forms import UserForm
+from ratearant.models import Restaurant
 
 # Create your views here.
 
 
 def home(request):
-    context_dict = {'message': 'Placeholder for the Team 5D Rate-A-Rant homepage',
-                    'isHomePage': True}
+    restaurant_list = Restaurant.objects.order_by('name')[:5]
+    fave_restaurant_list = Restaurant.objects.order_by('name')[5:]
+
+    context_dict = {}
+    context_dict['top_message'] = "Top Rated Restaurants"
+    context_dict['fave_message'] = "Favourite Restaurants"
+    context_dict['restaurants'] = restaurant_list
+    context_dict['fave_restaurants'] = fave_restaurant_list
     return render(request, 'ratearant/home.html', context=context_dict)
 
 

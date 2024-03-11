@@ -49,22 +49,33 @@
     </div>
 
     <footer class="footer">
-        {% if isHomePage %}
-            <div class="footerLinks">
-                <a href="{% url 'ratearant:about' %}" style="color: white"><h3>About</h3></a>
+
+        <div class="row">
+            <div class="col-1">
+                <img src="{% static 'ratearant/images/ratearanticon.jpeg'%}" class="img-fluid" width="60%" height="60%">
             </div>
-        {% elif isAboutPage %}
-            <div class="footerLinks">
-                <a href="{% url 'ratearant:home' %}" style="color: white"><h3>Home</h3></a>
-            </div>
-            {% else %}
-        <div class="footerLinks">
-            <a href="{% url 'ratearant:about' %}"><h3>About</h3></a>
-            <a href="{% url 'ratearant:home' %}"><h3>Home</h3></a>
-        </div>
-        {% endif %}
+            <div class="col-11 d-flex align-items-center justify-content-center">
+                {% if isHomePage %}
+                    <div class="footerLinks mx-2" style="border-right: ">
+                    <a href="{% url 'ratearant:about' %}" style="color: white"><h3>About</h3></a>
+                    </div>
+                {% elif isAboutPage %}
+                    <div class="footerLinks mx-2">
+                    <a href="{% url 'ratearant:home' %}" style="color: white"><h3>Home</h3></a>
+                    </div>
+                {% else %}
+                    <div class="footerLinks col-2">
+                        <a href="{% url 'ratearant:about' %}"><h3>About</h3></a>
+                    </div>
+                    <div class="col-8"></div>
+                    <div class="footerLinks col-2">
+                        <a href="{% url 'ratearant:home' %}"><h3>Home</h3></a>
+                    </div>
+                {% endif %}
        {% block block_footer %}
        {% endblock %}
+            </div>
+        </div>
     </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

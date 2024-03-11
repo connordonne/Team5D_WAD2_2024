@@ -10,10 +10,20 @@
 {% endblock %}
 
 {% block body_block %}
-	{% if restaurant %}
-		<P>{{ restaurant.name }}</P>
-        <P>{{ restaurant.address }}</P>
-        <P>{{ restaurant.phone }}</P>
-        <P>{{ restaurant.email }}</P>
+
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <img src="{% static 'ratearant/images/restaurants/frrant.jpg' %}" alt="French restaurant img" class="img-fluid">
+        </div>
+        <div class="col-md-8">
+            {% if restaurant %}
+		    <P>{{ restaurant.name }}</P>
+            <P>{{ restaurant.address }}</P>
+            <P>{{ restaurant.phone }}</P>
+            <P>{{ restaurant.email }}</P>
 	{% endif %}
+
+        </div>
+    </div>
+
 {% endblock %}

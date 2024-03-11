@@ -60,20 +60,24 @@ def show_restaurant(request, restaurant_name_slug):
 
 # User login
 def login_view(request):
+    error_message = "Invalid username or password."
+    
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        user = authenticate(username=username, password=password)
+        user = authenticate(request, username=username, password=password)
 
-        if user:
+        if user is not None:
             if user.is_active:
                 login(request, user)
                 return redirect(reverse('ratearant:home'))
-            else:
-                return HttpResponse("Your user account is disabled.")
-    else:
-        return render(request, 'ratearant/login.html')
+    
+    context = {
+        'error_message': error_message
+    }
+
+    return render(request, 'ratearant/login.html', context)
 
 
 # User logout
@@ -90,9 +94,11 @@ def register(request):
         user_form = UserForm(request.POST)
 
         if user_form.is_valid():
-            user = user_form.save()
-
-            user.set_password(user.password)
+            user = user_form.save(commit=False)
+            user.set_password(user_form.cleaned_data['password'])
+            user.email = user_form.cleaned_data['email']
+            user.first_name  = user_form.cleaned_data['first_name']
+            user.last_name  = user_form.cleaned_data['last_name']
             user.save()
             registered = True
         else:

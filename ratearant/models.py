@@ -26,6 +26,7 @@ class Restaurant(models.Model):
     openingTime = models.CharField(max_length=30)
     priceRange = models.CharField(max_length=16)
     cuisine = models.ForeignKey(Cuisine, on_delete=models.CASCADE)
+    # imgpath=models.CharField(max_length=256)
     slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs):

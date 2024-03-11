@@ -98,3 +98,18 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class TopRatedRestaurant(models.Model):
+    name = models.CharField(max_length=255)
+    image_url = models.URLField()
+
+    def __str__(self):
+        return self.name
+
+class YourTopRatedRestaurant(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    image_url = models.URLField()
+
+    def __str__(self):
+        return self.name

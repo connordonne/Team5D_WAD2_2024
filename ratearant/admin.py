@@ -1,5 +1,6 @@
 from django.contrib import admin
-from ratearant.models import Cuisine, Restaurant, User, Review, Comment, Score
+from ratearant.models import Cuisine, Restaurant, User, Review, Comment, Score, TopRatedRestaurant, \
+    YourTopRatedRestaurant
 
 # user login and logout
 from ratearant.models import UserProfile
@@ -18,7 +19,8 @@ class RestaurantAdmin(admin.ModelAdmin):
 
 admin.site.register(Cuisine, CuisineAdmin)
 admin.site.register(Restaurant, RestaurantAdmin)
-# admin.site.register(User)
+admin.site.register(TopRatedRestaurant)
+admin.site.register(YourTopRatedRestaurant)
 admin.site.register(Review)
 admin.site.register(Comment)
 admin.site.register(Score)

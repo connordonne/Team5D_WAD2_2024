@@ -10,6 +10,7 @@ from django.urls import reverse
 from django.http import HttpResponse
 from ratearant.forms import UserForm
 from ratearant.models import Restaurant
+from ratearant.models import TopRatedRestaurant, YourTopRatedRestaurant
 
 
 # Create your views here.
@@ -113,3 +114,12 @@ def delete_account(request):
     user.delete()
     return redirect('ratearant:home')
 """
+def trending(request):
+    top_rated_restaurants = TopRatedRestaurant.objects.all()
+    #your_top_rated_restaurants = YourTopRatedRestaurant.objects.filter(user=request.user)
+    
+    context = {
+        'top_rated_restaurants': top_rated_restaurants,
+        #'your_top_rated_restaurants': your_top_rated_restaurants,
+    }
+    return render(request, 'ratearant/trending.html', context)

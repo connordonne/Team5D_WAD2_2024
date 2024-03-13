@@ -8,7 +8,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import HttpResponse
-from ratearant.forms import UserForm
+from ratearant.forms import UserForm, ReviewForm
 from ratearant.models import Restaurant
 from ratearant.models import TopRatedRestaurant, YourTopRatedRestaurant
 
@@ -129,3 +129,22 @@ def trending(request):
         #'your_top_rated_restaurants': your_top_rated_restaurants,
     }
     return render(request, 'ratearant/trending.html', context)
+
+def add_review(request, restaurant_name_slug):
+    restaurant = Restaurant.objects.get(slug=restaurant_name_slug)
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.user = request.user  
+            review.restaurant = restaurant
+            review.save()
+            return redirect('ratearant:show_restaurant', restaurant_name_slug=restaurant.slug)  
+    else:
+        form = ReviewForm()
+    
+    context = {
+        'form': form,
+        'restaurant': restaurant
+    }
+    return render(request, 'ratearant/add_review.html', context)

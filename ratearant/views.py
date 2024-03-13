@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import HttpResponse
 from ratearant.forms import UserForm, ReviewForm
-from ratearant.models import Restaurant
+from ratearant.models import Restaurant, Cuisine
 from ratearant.models import TopRatedRestaurant, YourTopRatedRestaurant
 
 
@@ -30,6 +30,17 @@ def about(request):
                     'isAboutPage': True}
     return render(request, 'ratearant/about.html', context=context_dict)
 
+def categories(request):
+    restaurants_list = Restaurant.objects.order_by("-cuisine")[:]
+    cuisines_list = Cuisine.objects.order_by("-cuisineName")[:]
+    if len(cuisines_list) == 0:
+        cuisines_list = [1,2,3,4,5]
+
+    context_dict = {
+                    "cuisines" : cuisines_list,
+                    "restaurants" : restaurants_list,
+                }
+    return render(request, 'ratearant/categories.html', context=context_dict)
 
 def show_restaurant(request, restaurant_name_slug):
     context_dict = {}

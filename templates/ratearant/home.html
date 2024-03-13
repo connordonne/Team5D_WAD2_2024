@@ -26,7 +26,7 @@
           <img src="https://t3.ftcdn.net/jpg/06/78/48/94/360_F_678489461_3A71gTirz0O4paWtpKPYhXfNyz74Ut62.jpg" class="star">
           <p class="card-text">{{ restaurant.address }}</p>
           <a href="/ratearant/restaurant/{{ restaurant.slug }}/" class="btn btn-primary">See More</a>
-          <a href="/command/1/delete" class="btn btn-primary">Review</a>
+          <a href="{% url 'ratearant:add_review' restaurant_name_slug=restaurant.slug %}">Add Review</a>
         </div>
     </div>
   {% endfor %}
@@ -50,7 +50,7 @@
             <img src="https://t3.ftcdn.net/jpg/06/78/48/94/360_F_678489461_3A71gTirz0O4paWtpKPYhXfNyz74Ut62.jpg" class="star">
             <p class="card-text">{{ restaurant.address }}</p>
             <a href="/command/1/color" class="btn btn-primary">See More</a>
-            <a href="/command/1/delete" class="btn btn-primary">Review</a>
+            <a href="{% url 'ratearant:add_review' restaurant_name_slug=restaurant.slug %}">Add Review</a>
           </div>
       </div>
     {% endfor %}

@@ -56,9 +56,13 @@ class Review(models.Model):
     message = models.TextField()
     likes = models.IntegerField(default=0)
     averageScore = models.DecimalField(max_digits=3, decimal_places=1)
+    foodRating = models.IntegerField()
+    serviceRating = models.IntegerField()
+    overallRating = models.IntegerField()
 
     def __str__(self):
-        return self.reviewId
+        return str(self.reviewId)
+
 
 
 # Table for the comments on reviews.
@@ -70,7 +74,8 @@ class Comment(models.Model):
     likes = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.commentId
+        return str(self.reviewId)
+
 
 
 # Table for the scores given by users.

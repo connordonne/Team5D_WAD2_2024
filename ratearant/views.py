@@ -141,6 +141,7 @@ def trending(request):
     }
     return render(request, 'ratearant/trending.html', context)
 
+
 def add_review(request, restaurant_name_slug):
     restaurant = Restaurant.objects.get(slug=restaurant_name_slug)
     if request.method == 'POST':

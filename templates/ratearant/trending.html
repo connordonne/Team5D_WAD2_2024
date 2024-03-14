@@ -6,8 +6,38 @@
 {% block body_block %}
     <div class="top-rated-restaurants">
         <h2 class="text-center mb-4">Our Top Rated Restaurants</h2>
-    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-4">
-        {% for restaurant in top_rated_restaurants %}
+    
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-5 g-4">
+            <div class="col">
+                <div class="card">
+                    <img src="{% static 'ratearant/images/rice.jpg' %}" class="card-img-top" alt="place holder here" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="{% static 'ratearant/images/rice.jpg' %}" class="card-img-top" alt="place holder here" />
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card">
+                    <img src="{% static 'ratearant/images/rice.jpg' %}" class="card-img-top" alt="place holder here" />
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card">
+                    <img src="{% static 'ratearant/images/rice.jpg' %}" class="card-img-top" alt="place holder here" />
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card">
+                    <img src="{% static 'ratearant/images/rice.jpg' %}" class="card-img-top" alt="place holder here" />
+                </div>
+            </div>
+        </div>
+            {% for restaurant in top_rated_restaurants %}
         <div class="col">
             <div class="card">
                 <img src="static/ratearant/images/pancakes.jpg" class="card-img-top">
@@ -49,8 +79,4 @@
     {% endfor %}
 </div>
 </div>
-{% endblock %}
-
-{% block block_footer %}
-    <li><a href="{% url 'ratearant:home' %}">Index</a>
 {% endblock %}

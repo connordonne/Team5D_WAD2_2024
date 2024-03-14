@@ -71,7 +71,7 @@ def show_restaurant(request, restaurant_name_slug):
 
 # User login
 def login_view(request):
-    error_message = "Invalid username or password."
+    error_message = None
     
     if request.method == 'POST':
         username = request.POST.get('username')

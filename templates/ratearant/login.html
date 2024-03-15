@@ -6,14 +6,17 @@
 {% endblock %}
 
 {% block body_block %}
+
 <link rel="stylesheet" href="{% static 'ratearant/CSS/styles.css' %}"> <!-- don't know why I'm having to add this in order to make line 
                                                                                   20 show up correctly-->
     <div class="pTextRed" style="text-align: center;">
-        <h4>Login to Ratearant</h4>
+        <h4>Login to Rate-A-Rant</h4>
         <form id="login_form" method="post" action="{% url 'ratearant:login' %}">
             {% csrf_token %}
             <div style="margin-bottom: 10px;">
+                <img src="{% static 'ratearant/images/ratearanticon.jpeg' %}" id="changeImageLeft" alt="Site icon" style="width: 130px; height: 130px; float: left; margin-right: 10px;"/>
                 Username: <input type="text" name="username" value="" size="50" />
+                <img src="{% static 'ratearant/images/ratearanticon.jpeg' %}" id="changeImageRight" alt="Site icon" style="width: 130px; height: 130px; float: right; margin-left: 10px;"/>
             </div>
             <div style="margin-bottom: 10px;">
                 Password: <input type="password" name="password" value="" size="50" />
@@ -28,6 +31,9 @@
             {% endif %}            
         </form>
     </div>
+
+    <script src="{% static 'ratearant/scripts/scriptsTest.js' %}"></script>
+ 
 {% endblock %}
 
 {% block block_footer %}

@@ -2,12 +2,16 @@
 {% load static %}
 
 {% block body_block %}
+<link rel="stylesheet" href="{% static 'ratearant/CSS/styles.css' %}">
 <div class="container">
-    <h2>Add Review for {{ restaurant.name }}</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Submit Review</button>
-    </form>
+    <div class="text-center">
+        <h2>Add Review for {{ restaurant.name }}</h2>
+        <div class="vertical-gap"></div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btnRed" >Submit</button>
+        </form>
+    </div>
 </div>
 {% endblock %}

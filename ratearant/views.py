@@ -9,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import HttpResponse
 from ratearant.forms import UserForm, ReviewForm
-from ratearant.models import Restaurant, Cuisine
+from ratearant.models import Restaurant, Cuisine, Review
 from ratearant.models import TopRatedRestaurant, YourTopRatedRestaurant
 
 
@@ -30,31 +30,37 @@ def about(request):
                     'isAboutPage': True}
     return render(request, 'ratearant/about.html', context=context_dict)
 
+
 def categories(request):
     restaurants_list = Restaurant.objects.order_by("-cuisine")[:]
     cuisines_list = Cuisine.objects.order_by("-cuisineName")[:]
     if len(cuisines_list) == 0:
-        cuisines_list = [1,2,3,4,5]
+        cuisines_list = [1, 2, 3, 4, 5]
 
     context_dict = {
-                    "cuisines" : cuisines_list,
-                    "restaurants" : restaurants_list,
-                }
+        "cuisines": cuisines_list,
+        "restaurants": restaurants_list,
+    }
     return render(request, 'ratearant/categories.html', context=context_dict)
+
 
 def show_restaurant(request, restaurant_name_slug):
     context_dict = {}
 
     try:
-        # getting the restaurant reocrds by the slug
+        # getting the restaurant records by the slug
         restaurant = Restaurant.objects.get(slug=restaurant_name_slug)
+        # getting the reviews associated with the restaurant
+        reviews = Review.objects.filter(restaurant=restaurant)
         context_dict = {'restaurant': restaurant, 'name': restaurant.name,
                         'address': restaurant.address,
                         'phone': restaurant.phone,
                         'website': restaurant.website,
                         'openingTime': restaurant.openingTime,
                         'priceRange': restaurant.priceRange,
-                        'cuisine': restaurant.cuisine}
+                        'cuisine': restaurant.cuisine,
+                        'reviews': reviews}
+
 
     except Restaurant.DoesNotExist:
         context_dict['restaurant'] = None
@@ -72,7 +78,7 @@ def show_restaurant(request, restaurant_name_slug):
 # User login
 def login_view(request):
     error_message = None
-    
+
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -83,7 +89,7 @@ def login_view(request):
             if user.is_active:
                 login(request, user)
                 return redirect(reverse('ratearant:home'))
-    
+
     context = {
         'error_message': error_message
     }
@@ -108,8 +114,8 @@ def register(request):
             user = user_form.save(commit=False)
             user.set_password(user_form.cleaned_data['password'])
             user.email = user_form.cleaned_data['email']
-            user.first_name  = user_form.cleaned_data['first_name']
-            user.last_name  = user_form.cleaned_data['last_name']
+            user.first_name = user_form.cleaned_data['first_name']
+            user.last_name = user_form.cleaned_data['last_name']
             user.save()
             registered = True
         else:
@@ -131,30 +137,33 @@ def delete_account(request):
     user.delete()
     return redirect('ratearant:home')
 """
+
+
 def trending(request):
     top_rated_restaurants = TopRatedRestaurant.objects.all()
-    #your_top_rated_restaurants = YourTopRatedRestaurant.objects.filter(user=request.user)
-    
+    # your_top_rated_restaurants = YourTopRatedRestaurant.objects.filter(user=request.user)
+
     context = {
         'top_rated_restaurants': top_rated_restaurants,
-        #'your_top_rated_restaurants': your_top_rated_restaurants,
+        # 'your_top_rated_restaurants': your_top_rated_restaurants,
     }
     return render(request, 'ratearant/trending.html', context)
 
 
+@login_required
 def add_review(request, restaurant_name_slug):
     restaurant = Restaurant.objects.get(slug=restaurant_name_slug)
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():
             review = form.save(commit=False)
-            review.user = request.user  
+            review.user = request.user
             review.restaurant = restaurant
             review.save()
-            return redirect('ratearant:show_restaurant', restaurant_name_slug=restaurant.slug)  
+            return redirect('ratearant:show_restaurant', restaurant_name_slug=restaurant.slug)
     else:
         form = ReviewForm()
-    
+
     context = {
         'form': form,
         'restaurant': restaurant

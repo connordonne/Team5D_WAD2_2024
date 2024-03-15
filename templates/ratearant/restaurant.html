@@ -12,18 +12,53 @@
 {% block body_block %}
 
     <div class="row mb-3">
-        <div class="col-md-4">
-            <img src="{% static 'ratearant/images/restaurants/frrant.jpg' %}" alt="French restaurant img" class="img-fluid">
-        </div>
-        <div class="col-md-8">
+
+        <div class="col-md-6">
             {% if restaurant %}
-		    <P>{{ restaurant.name }}</P>
-            <P>{{ restaurant.address }}</P>
-            <P>{{ restaurant.phone }}</P>
-            <P>{{ restaurant.email }}</P>
-	{% endif %}
+                <div class="card" style="width: 50rem;">
+                    <img id="restaurantpic" class="card-img-top img-fluid randomRestImage"
+                         src=""
+                         alt="restaurant picture" >
+                    <div class="card-body">
+                    <h5 class="card-title">{{ restaurant.name }}</h5>
+                        <div>
+                            <ul>
+                                <li>Where: {{ restaurant.address }}</li>
+                                <li>Telephone: {{ restaurant.phone }}</li>
+                                <li>Price Range: {{ restaurant.priceRange }}</li>
+                                <li>Opening times: {{ restaurant.openingTime }}</li>
+                                <li>Food style: {{ restaurant.cuisine.cuisineName }}</li>
 
+                            </ul>
+                        </div>
+                    <a href="{% url 'ratearant:home' %}" class="btn btn-primary">Back</a>
+                    </div>
+                </div>
+	        {% endif %}
         </div>
-    </div>
+    <div class="col-md-6">
+        {% if restaurant %}
+                <div class="card" style="width: 50rem;">
+                    <div class="card-body">
+                    <h5 class="card-title">Reviews</h5>
+                        {% for review in reviews %}
+                            <ul>
+                                <li>{{ review.message }}</li>
+                                <li>Likes: {{ review.likes }}</li>
+                                <li>Average Score: {{ review.averageScore }}</li>
+                                <li>Food Rating: {{ review.foodRating }}</li>
+                                <li>Service Rating: {{ review.serviceRating }}</li>
+                                <li>Overall Rating: {{ review.overallRating }}</li>
+                            </ul>
+                        {% endfor %}
 
+                    </div>
+                </div>
+	        {% endif %}
+
+
+
+    </div>
+    </div>
+<script src="{% static 'ratearant/scripts/randomrantimage.js' %}"></script>
 {% endblock %}

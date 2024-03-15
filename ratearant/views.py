@@ -71,7 +71,7 @@ def show_restaurant(request, restaurant_name_slug):
 
 # User login
 def login_view(request):
-    error_message = "Invalid username or password."
+    error_message = None
     
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -140,6 +140,7 @@ def trending(request):
         #'your_top_rated_restaurants': your_top_rated_restaurants,
     }
     return render(request, 'ratearant/trending.html', context)
+
 
 def add_review(request, restaurant_name_slug):
     restaurant = Restaurant.objects.get(slug=restaurant_name_slug)

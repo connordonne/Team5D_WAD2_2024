@@ -5,6 +5,7 @@ import sys
 #python manage.py runserver
 #python manage.py makemigrations
 #python manage.py migrate
+#python populate.py
 
 def main():
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'team5d.settings')

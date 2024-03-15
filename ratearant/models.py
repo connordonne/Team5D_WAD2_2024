@@ -36,6 +36,7 @@ class Restaurant(models.Model):
     def __str__(self):
         return self.name
 
+
 # Table for the user.
 class User(models.Model):
     userId = models.AutoField(primary_key=True)
@@ -47,6 +48,7 @@ class User(models.Model):
 
     def __str__(self):
         return self.username
+
 
 # Table for the reviews.
 class Review(models.Model):
@@ -64,7 +66,6 @@ class Review(models.Model):
         return str(self.reviewId)
 
 
-
 # Table for the comments on reviews.
 class Comment(models.Model):
     commentId = models.AutoField(primary_key=True)
@@ -75,7 +76,6 @@ class Comment(models.Model):
 
     def __str__(self):
         return str(self.reviewId)
-
 
 
 # Table for the scores given by users.
@@ -104,12 +104,14 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
+
 class TopRatedRestaurant(models.Model):
     name = models.CharField(max_length=255)
     image_url = models.URLField()
 
     def __str__(self):
         return self.name
+
 
 class YourTopRatedRestaurant(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

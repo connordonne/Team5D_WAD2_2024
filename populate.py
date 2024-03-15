@@ -113,6 +113,14 @@ def populate():
         }
     ]
 
+    reviews=[
+        {
+
+        }
+
+    ]
+
+
     add_cuisine(cuisine_types)
     add_restaurant(restaurants)
 

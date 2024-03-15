@@ -12,10 +12,11 @@ class UserForm(forms.ModelForm):
                   'email', 'password')
 
 class ReviewForm(forms.ModelForm):
-    message = forms.CharField(required=True)
-    foodRating = forms.IntegerField(required=True, max_value=5)
-    serviceRating = forms.IntegerField(required=True, max_value=5)
-    overallRating = forms.IntegerField(required=True, max_value=5)
+    foodRating = forms.IntegerField(label='Food Rating', required=True, max_value=5, min_value=1)
+    serviceRating = forms.IntegerField(label='Service Rating', required=True, max_value=5, min_value=1)
+    overallRating = forms.IntegerField(label='Overall Rating', required=True, max_value=5, min_value=1)
+    message = forms.CharField(required=True, label='', widget=forms.Textarea(attrs={'rows': 5, 'placeholder':'Add your thoughts here!'}))
+
     class Meta:
         model = Review
-        fields = ('message', 'foodRating', 'serviceRating', 'overallRating')
+        fields = ('foodRating', 'serviceRating', 'overallRating', 'message')

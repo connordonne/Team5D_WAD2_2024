@@ -29,6 +29,10 @@ class Restaurant(models.Model):
     # imgpath=models.CharField(max_length=256)
     slug = models.SlugField(unique=True)
 
+    #Score
+    number_of_reviews = models.PositiveIntegerField(default=0)
+    average_rating = models.DecimalField(max_digits=3, decimal_places=2, default=0.00)
+
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         super(Restaurant, self).save(*args, **kwargs)

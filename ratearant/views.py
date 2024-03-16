@@ -1,16 +1,12 @@
-from django.shortcuts import render
-
 # User login and logout
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render, redirect
-from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.http import HttpResponse
+
 from ratearant.forms import UserForm, ReviewForm
 from ratearant.models import Restaurant, Cuisine, Review
-from ratearant.models import TopRatedRestaurant, YourTopRatedRestaurant
+from ratearant.models import TopRatedRestaurant
 
 
 # Create your views here.
@@ -20,7 +16,7 @@ def home(request):
     restaurant_list = Restaurant.objects.order_by('-average_rating')[:5]
     fave_restaurant_list = Restaurant.objects.order_by('-number_of_reviews')[5:]
 
-    context_dict = {'top_message': "Top Rated Restaurants", 
+    context_dict = {'top_message': "Top Rated Restaurants",
                     'fave_message': "Favourite Restaurants",
                     'restaurants': restaurant_list, 'fave_restaurants': fave_restaurant_list,
                     'range': range(1, 6)
@@ -73,6 +69,7 @@ def show_restaurant(request, restaurant_name_slug):
         context_dict['openingTime'] = None
         context_dict['priceRange'] = None
         context_dict['cuisine'] = None
+        context_dict['reviews'] = None
 
     return render(request, 'ratearant/restaurant.html', context=context_dict)
 
@@ -129,6 +126,7 @@ def register(request):
                   'ratearant/register.html',
                   context={'user_form': user_form,
                            'registered': registered})
+
 
 def trending(request):
     top_rated_restaurants = TopRatedRestaurant.objects.all()

@@ -1,8 +1,8 @@
 .idea/
 db.sqlite3
-ratearant/migrations/
-ratearant/__pycache__/
-team5d/__pycache__/
+**/ratearant/migrations/
+**/ratearant/__pycache__/
+**/team5d/__pycache__/
 
 ratearant/__pycache__/__init__.cpython-39.pyc
 ratearant/__pycache__/forms.cpython-39.pyc

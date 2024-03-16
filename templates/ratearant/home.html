@@ -73,7 +73,7 @@
             </div>
             <p class="card-text">{{ restaurant.address }}</p>
             <a href="/command/1/color" class="btn btnRed">See More</a>
-            <a href="{% url 'ratearant:add_review' restaurant_name_slug=restaurant.slug %}">Add Review</a>
+            <a href="{% url 'ratearant:add_review' restaurant_name_slug=restaurant.slug %}" class="btn btnRed">Add Review</a>
           </div>
       </div>
     {% endfor %}

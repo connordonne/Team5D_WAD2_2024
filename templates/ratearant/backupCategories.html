@@ -1,0 +1,42 @@
+{% extends 'ratearant/base.html' %}
+{% load static %}
+
+{% block block_title %}
+    Categories Page
+{% endblock %}
+
+{% block body_block %}
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: center;">
+    {% for cuisine in cuisines %}
+        <div style="border: 2px solid gold; padding: 10px; width: 100%; text-align: center; margin-bottom: 10px;">
+            <h4 style="color: gold;">{{cuisine.cuisineName}}</h4>
+        </div>
+        {% for restaurant in restaurants %}
+            {% if restaurant.cuisine.cuisineName == cuisine.cuisineName %}
+            {#  Single Card Template:#}
+            <div class="card" style="width: 18rem; margin: 10px">
+                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/af/26/f1/selection-of-food.jpg?w=600&h=400&s=1" class="card-img-top" >
+                <div class="card-body">
+                    <div style="display: flex; flex-direction: row">
+                        <h5 class="card-title">{{ restaurant.name }}</h5>
+                    </div>
+                    <div class="star-rating">
+                    {% for i in range %}
+                        {% if i <= restaurant.average_rating %}
+                            <span >&#11088;</span>
+                        {% else %}
+                            <span class="empty-star">&#9734;</span>
+                        {% endif %}
+                    {% endfor %}
+                    <p>Average Rating: {{ restaurant.average_rating }} ({{ restaurant.number_of_reviews }} reviews)</p>
+                    </div>
+                    <p class="card-text">{{ restaurant.address }}</p>
+                    <a href="/ratearant/restaurant/{{ restaurant.slug }}/" class="btn btn-primary">See More</a>
+                    <a href="{% url 'ratearant:add_review' restaurant_name_slug=restaurant.slug %}">Add Review</a>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+    </div>
+{% endblock %}

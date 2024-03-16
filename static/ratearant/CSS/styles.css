@@ -22,11 +22,12 @@ h1 {
 }
 
 .btnRed {
-    background-color: #95090d;
-    color: white;
-    width: 100px;
+    background-color: #95090d !important;
+    color: white !important;
+    width: auto!important;
 }
-
+.btnRed h5{
+;}
 #titleGreen {
     color: green;
 }
@@ -73,5 +74,8 @@ h1 {
 .randomRestImage{
     max-width: 400px;
     max-height: 600px;
-
+}
+.cuisinePic{
+    max-height: 300px;
+    max-width: 200px;
 }

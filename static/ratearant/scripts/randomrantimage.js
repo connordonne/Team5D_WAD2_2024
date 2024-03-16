@@ -8,3 +8,4 @@ $(document).ready(function (){
     console.log(image);
     $('#restaurantpic').attr('src',image);
 });
+

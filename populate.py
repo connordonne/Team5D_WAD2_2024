@@ -28,7 +28,9 @@ def populate():
             'website': 'https://www.piazzaitalia.co.uk',
             'openingTime': '12:00 - 23:00',
             'priceRange': '£££',
-            'cuisine': 'Italian'
+            'cuisine': 'Italian',
+            'number_of_reviews': 53,
+            'average_rating': 4.65
         },
         {
             'name': 'Taj Mahal Indian Restaurant',
@@ -37,7 +39,9 @@ def populate():
             'website': 'https://www.tajmahalindian.co.uk',
             'openingTime': '17:30 - 22:30',
             'priceRange': '££',
-            'cuisine': 'Indian'
+            'cuisine': 'Indian',
+            'number_of_reviews': 42,
+            'average_rating': 3.12
         },
         {
             'name': 'Golden Dragon Chinese Cuisine',
@@ -46,7 +50,9 @@ def populate():
             'website': 'https://www.goldendragonchinese.co.uk',
             'openingTime': '11:00 - 22:00',
             'priceRange': '££',
-            'cuisine': 'Chinese'
+            'cuisine': 'Chinese',
+            'number_of_reviews': 81,
+            'average_rating': 1.03
         },
         {
             'name': 'Siam Thai Kitchen',
@@ -55,7 +61,9 @@ def populate():
             'website': 'https://www.siamthaikitchen.co.uk',
             'openingTime': '18:00 - 23:30',
             'priceRange': '££',
-            'cuisine': 'Thai'
+            'cuisine': 'Thai',
+            'number_of_reviews': 12,
+            'average_rating': 1.62
         },
         {
             'name': 'El Mariachi Mexican Cantina',
@@ -64,7 +72,9 @@ def populate():
             'website': 'https://www.elmariachimexican.co.uk',
             'openingTime': '12:00 - 21:00',
             'priceRange': '££',
-            'cuisine': 'Mexican'
+            'cuisine': 'Mexican',
+            'number_of_reviews': 99,
+            'average_rating': 1
         },
         {
             'name': 'Sakura Japanese Dining',
@@ -73,7 +83,9 @@ def populate():
             'website': 'https://www.sakurajapanesedining.co.uk',
             'openingTime': '18:30 - 22:30',
             'priceRange': '£££',
-            'cuisine': 'Japanese'
+            'cuisine': 'Japanese',
+            'number_of_reviews': 1,
+            'average_rating': 2
         },
         {
             'name': 'Olive Tree Greek Tavern',
@@ -82,7 +94,9 @@ def populate():
             'website': 'https://www.olivetreegreektavern.co.uk',
             'openingTime': '17:00 - 23:00',
             'priceRange': '££',
-            'cuisine': 'Greek'
+            'cuisine': 'Greek',
+            'number_of_reviews': 34,
+            'average_rating': 5
         },
         {
             'name': 'Le Bistro Français',
@@ -91,7 +105,9 @@ def populate():
             'website': 'https://www.lebistrofrancais.co.uk',
             'openingTime': '19:00 - 00:00',
             'priceRange': '£££',
-            'cuisine': 'French'
+            'cuisine': 'French',
+            'number_of_reviews': 52,
+            'average_rating': 3.62
         },
         {
             'name': 'Tapas y Vinos',
@@ -100,7 +116,9 @@ def populate():
             'website': 'https://www.tapasyvinos.co.uk',
             'openingTime': '18:00 - 22:30',
             'priceRange': '££',
-            'cuisine': 'Spanish'
+            'cuisine': 'Spanish',
+            'number_of_reviews': 73,
+            'average_rating': 2.99
         },
         {
             'name': 'Uncle Sam\'s Diner',
@@ -109,17 +127,11 @@ def populate():
             'website': 'https://www.unclesamsdiner.co.uk',
             'openingTime': '07:00 - 22:00',
             'priceRange': '£',
-            'cuisine': 'American'
+            'cuisine': 'American',
+            'number_of_reviews': 71,
+            'average_rating': 2.5
         }
     ]
-
-    reviews=[
-        {
-
-        }
-
-    ]
-
 
     add_cuisine(cuisine_types)
     add_restaurant(restaurants)
@@ -143,7 +155,9 @@ def add_restaurant(restaurants):
             website=restaurant['website'],
             openingTime=restaurant['openingTime'],
             priceRange=restaurant['priceRange'],
-            defaults={'cuisine': cuisine}
+            defaults={'cuisine': cuisine},
+            number_of_reviews=restaurant['number_of_reviews'],
+            average_rating=restaurant['average_rating']
         )
 
         print(r.name)

@@ -17,11 +17,14 @@ from ratearant.models import TopRatedRestaurant, YourTopRatedRestaurant
 
 
 def home(request):
-    restaurant_list = Restaurant.objects.order_by('name')[:5]
-    fave_restaurant_list = Restaurant.objects.order_by('name')[5:]
+    restaurant_list = Restaurant.objects.order_by('-average_rating')[:5]
+    fave_restaurant_list = Restaurant.objects.order_by('-number_of_reviews')[5:]
 
-    context_dict = {'top_message': "Top Rated Restaurants", 'fave_message': "Favourite Restaurants",
-                    'restaurants': restaurant_list, 'fave_restaurants': fave_restaurant_list}
+    context_dict = {'top_message': "Top Rated Restaurants", 
+                    'fave_message': "Favourite Restaurants",
+                    'restaurants': restaurant_list, 'fave_restaurants': fave_restaurant_list,
+                    'range': range(1, 6)
+                    }
     return render(request, 'ratearant/home.html', context=context_dict)
 
 
@@ -34,12 +37,11 @@ def about(request):
 def categories(request):
     restaurants_list = Restaurant.objects.order_by("-cuisine")[:]
     cuisines_list = Cuisine.objects.order_by("-cuisineName")[:]
-    if len(cuisines_list) == 0:
-        cuisines_list = [1, 2, 3, 4, 5]
 
     context_dict = {
         "cuisines": cuisines_list,
         "restaurants": restaurants_list,
+        'range': range(1, 6)
     }
     return render(request, 'ratearant/categories.html', context=context_dict)
 
@@ -127,17 +129,6 @@ def register(request):
                   'ratearant/register.html',
                   context={'user_form': user_form,
                            'registered': registered})
-
-
-# User delete
-"""
-@login_required
-def delete_account(request):
-    user = get_user_model().objects.get(username=request.user.username)
-    user.delete()
-    return redirect('ratearant:home')
-"""
-
 
 def trending(request):
     top_rated_restaurants = TopRatedRestaurant.objects.all()

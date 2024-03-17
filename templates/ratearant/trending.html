@@ -33,7 +33,7 @@
           <p class="card-text">{{ restaurant.address }}</p>
           <a href="/ratearant/restaurant/{{ restaurant.slug }}/" class="btn btnRed">See More</a>
           {% if user.is_authenticated %}
-          <a href="{% url 'ratearant:add_review' restaurant_name_slug=restaurant.slug %}">Add Review</a>
+            <a href="{% url 'ratearant:add_review' restaurant_name_slug=restaurant.slug %}" class="btn btnRed">Add Review</a>
           {% endif %}
         </div>
     </div>
@@ -67,7 +67,7 @@
               <p>Average Rating: {{ restaurant.average_rating }} ({{ restaurant.number_of_reviews }} reviews)</p>
             </div>
             <p class="card-text">{{ restaurant.address }}</p>
-            <a href="/command/1/color" class="btn btnRed">See More</a>
+            <a href="/ratearant/restaurant/{{ restaurant.slug }}/" class="btn btnRed">See More</a>
             <a href="{% url 'ratearant:add_review' restaurant_name_slug=restaurant.slug %}" class="btn btnRed">Add Review</a>
           </div>
       </div>

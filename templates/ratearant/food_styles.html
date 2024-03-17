@@ -12,7 +12,7 @@
         {#  Single Card Template:#}
         <div class="card" style="width: 18rem; margin: 10px;text-align: center">
             <a href="/ratearant/categories/{{ cuisine.cuisineName }}/">
-                <img href="/ratearant/restaurant/{{ restaurant.slug }}/" src="{% static '/ratearant/images/cuisines/' %}{{ cuisine.cuisineName}}.jpg" class="card-img-top cuisinePic img-fluid" >
+                <img href="/ratearant/restaurant/{{ restaurant.slug }}/" src="{% static '/ratearant/images/cuisines/'%}{{ cuisine.cuisineName|lower}}.jpg" class="card-img-top cuisinePic img-fluid" >
             </a>
 
             <div class="card-body">

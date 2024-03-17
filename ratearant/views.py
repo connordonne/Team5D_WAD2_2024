@@ -30,7 +30,7 @@ def about(request):
     return render(request, 'ratearant/about.html', context=context_dict)
 
 
-def categories(request):
+def food_styles(request):
     restaurants_list = Restaurant.objects.order_by("-cuisine")[:]
     cuisines_list = Cuisine.objects.order_by("-cuisineName")[:]
 
@@ -39,6 +39,25 @@ def categories(request):
         "restaurants": restaurants_list,
         'range': range(1, 6)
     }
+    return render(request, 'ratearant/food_styles.html', context=context_dict)
+
+def categories(request, cuisineName):
+    context_dict = {}
+    try:
+        # Assuming cuisineName is a valid name of a cuisine
+        cuisine = Cuisine.objects.get(cuisineName=cuisineName)
+        restaurants = Restaurant.objects.filter(cuisine=cuisine)
+
+        context_dict = {
+            "cuisine": cuisine,
+            "restaurants": restaurants
+        }
+    
+    except Cuisine.DoesNotExist:
+        context_dict = {
+            "cuisine": None,
+            "restaurants": []
+        }
     return render(request, 'ratearant/categories.html', context=context_dict)
 
 

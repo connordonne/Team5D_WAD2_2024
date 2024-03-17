@@ -6,7 +6,7 @@ from django.urls import reverse
 
 from ratearant.forms import UserForm, ReviewForm
 from ratearant.models import Restaurant, Cuisine, Review
-from ratearant.models import TopRatedRestaurant
+from ratearant.models import TopRatedRestaurant, YourTopRatedRestaurant
 
 
 # Create your views here.
@@ -29,7 +29,6 @@ def about(request):
                     'isAboutPage': True}
     return render(request, 'ratearant/about.html', context=context_dict)
 
-
 def food_styles(request):
     restaurants_list = Restaurant.objects.order_by("-cuisine")[:]
     cuisines_list = Cuisine.objects.order_by("-cuisineName")[:]
@@ -41,23 +40,15 @@ def food_styles(request):
     }
     return render(request, 'ratearant/food_styles.html', context=context_dict)
 
-def categories(request, cuisineName):
-    context_dict = {}
-    try:
-        # Assuming cuisineName is a valid name of a cuisine
-        cuisine = Cuisine.objects.get(cuisineName=cuisineName)
-        restaurants = Restaurant.objects.filter(cuisine=cuisine)
+def categories(request):
+    restaurants_list = Restaurant.objects.order_by("-cuisine")[:]
+    cuisines_list = Cuisine.objects.order_by("-cuisineName")[:]
 
-        context_dict = {
-            "cuisine": cuisine,
-            "restaurants": restaurants
-        }
-    
-    except Cuisine.DoesNotExist:
-        context_dict = {
-            "cuisine": None,
-            "restaurants": []
-        }
+    context_dict = {
+        "cuisines": cuisines_list,
+        "restaurants": restaurants_list,
+        'range': range(1, 6)
+    }
     return render(request, 'ratearant/categories.html', context=context_dict)
 
 
@@ -148,14 +139,23 @@ def register(request):
 
 
 def trending(request):
-    top_rated_restaurants = TopRatedRestaurant.objects.all()
-    # your_top_rated_restaurants = YourTopRatedRestaurant.objects.filter(user=request.user)
+    restaurant_list = Restaurant.objects.order_by('-average_rating')[:5]
+    fave_restaurant_list = Restaurant.objects.order_by('-number_of_reviews')[:5]
 
-    context = {
-        'top_rated_restaurants': top_rated_restaurants,
-        # 'your_top_rated_restaurants': your_top_rated_restaurants,
+    user_top_rated_restaurants = None
+    if request.user.is_authenticated:
+        user_top_rated_restaurants = YourTopRatedRestaurant.objects.filter(user=request.user)
+
+
+    context_dict = {
+        'top_message': "Top Rated Restaurants",
+        'fave_message': "Favourite Restaurants",
+        'restaurants': restaurant_list,
+        'fave_restaurants': fave_restaurant_list,
+        'user_top_rated_restaurants': user_top_rated_restaurants,
+        'range': range(1, 6)
     }
-    return render(request, 'ratearant/trending.html', context)
+    return render(request, 'ratearant/trending.html', context=context_dict)
 
 
 @login_required
@@ -177,3 +177,20 @@ def add_review(request, restaurant_name_slug):
         'restaurant': restaurant
     }
     return render(request, 'ratearant/add_review.html', context)
+
+
+@login_required
+def like_restaurant(request, restaurant_id):
+    restaurant = get_object_or_404(Restaurant, id=restaurant_id)
+    user_like, created = UserLike.objects.get_or_create(user=request.user, restaurant=restaurant)
+
+    if not created:
+        # User has already liked the restaurant, so remove the like
+        user_like.delete()
+        restaurant.likes -= 1
+    else:
+        # User has liked the restaurant
+        restaurant.likes += 1
+
+    restaurant.save()
+    return redirect('restaurant_detail', restaurant_id=restaurant_id)

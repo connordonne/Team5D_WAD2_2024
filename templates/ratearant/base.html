@@ -30,6 +30,11 @@
             <li><a href="{% url 'ratearant:food_styles' %}" class="nav-link px-2" style="color: white"><h2>Food Styles</h2></a></li>
         <!----->
         <li><a href="{% url 'ratearant:trending' %}" class="nav-link px-2" style="color: white"><h2>Trending</h2></a></li>
+                {% if not isHomePage %}
+                    <li>
+                    <a href="{% url 'ratearant:home' %}" class="nav-link px-2" style="color: white"><h2>Home</h2></a>
+                </li>
+                {% endif %}
         </ul>
 
         <div class="text-end">

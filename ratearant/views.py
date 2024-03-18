@@ -19,7 +19,8 @@ def home(request):
     context_dict = {'top_message': "Top Rated Restaurants",
                     'fave_message': "Favourite Restaurants",
                     'restaurants': restaurant_list, 'fave_restaurants': fave_restaurant_list,
-                    'range': range(1, 6)
+                    'range': range(1, 6),
+                    'isHomePage': True,
                     }
     return render(request, 'ratearant/home.html', context=context_dict)
 

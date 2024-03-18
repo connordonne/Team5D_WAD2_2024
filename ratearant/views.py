@@ -23,10 +23,12 @@ def home(request):
                     }
     return render(request, 'ratearant/home.html', context=context_dict)
 
+
 def about(request):
     context_dict = {'message': 'Placeholder for the Team 5D Rate-A-Rant About page',
                     'isAboutPage': True}
     return render(request, 'ratearant/about.html', context=context_dict)
+
 
 def food_styles(request):
     restaurants_list = Restaurant.objects.order_by("-cuisine")[:]
@@ -39,6 +41,7 @@ def food_styles(request):
     }
     return render(request, 'ratearant/food_styles.html', context=context_dict)
 
+
 def categories(request, cuisineName):
     context_dict = {}
     try:
@@ -50,7 +53,7 @@ def categories(request, cuisineName):
             "cuisine": cuisine,
             "restaurants": restaurants
         }
-    
+
     except Cuisine.DoesNotExist:
         context_dict = {
             "cuisine": None,
@@ -151,7 +154,7 @@ def trending(request):
 
     context_dict = {'top_message': "Top Rated Restaurants",
                     'fave_message': "Favourite Restaurants",
-                    'restaurants': restaurant_list, 
+                    'restaurants': restaurant_list,
                     'fave_restaurants': fave_restaurant_list,
                     'range': range(1, 6)
                     }
@@ -167,6 +170,10 @@ def add_review(request, restaurant_name_slug):
             review = form.save(commit=False)
             review.user = request.user
             review.restaurant = restaurant
+            review.foodRating = request.POST.get('foodRating')
+            review.serviceRating = request.POST.get('serviceRating')
+            review.overallRating = request.POST.get('overallRating')
+            review.averageScore = (int(review.foodRating) + int(review.serviceRating) + int(review.overallRating)) / 3
             review.save()
             return redirect('ratearant:show_restaurant', restaurant_name_slug=restaurant.slug)
     else:

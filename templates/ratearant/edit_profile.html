@@ -1,0 +1,42 @@
+{% extends 'ratearant/base.html' %}
+
+{% block body_block %}
+<div class="container">
+    <h2>Edit Profile</h2>
+    <form method="post">
+        {% csrf_token %}
+        <!-- Display each form field individually -->
+        <div class="mb-3">
+            <label for="id_first_name" class="form-label">First name:</label>
+            <!-- Include placeholders and set the value attribute for pre-filling -->
+            <input type="text" class="form-control" id="id_first_name" name="first_name" value="{{ user_form.instance.first_name }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="id_last_name" class="form-label">Last name:</label>
+            <input type="text" class="form-control" id="id_last_name" name="last_name" value="{{ user_form.instance.last_name }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="id_password" class="form-label">Password (leave blank to keep the current password):</label>
+            <input type="password" class="form-control" id="id_password" name="password">
+        </div>
+
+        {% if messages %}
+        <div class="alert alert-info" role="alert">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if user_form.errors %}
+        <div class="alert alert-danger" role="alert">
+            Please correct the errors below.
+            {{ user_form.errors }}
+        </div>
+        {% endif %}
+
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,12 +1,15 @@
 # User login and logout
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
-from ratearant.forms import UserForm, ReviewForm
-from ratearant.models import Restaurant, Cuisine, Review
-from ratearant.models import TopRatedRestaurant, YourTopRatedRestaurant
+from ratearant.forms import UserForm, ReviewForm, ChangeUserForm
+from ratearant.models import Restaurant, Cuisine, Review, Comment
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.http import HttpResponseForbidden
 
 
 # Create your views here.
@@ -185,3 +188,49 @@ def add_review(request, restaurant_name_slug):
         'restaurant': restaurant
     }
     return render(request, 'ratearant/add_review.html', context)
+
+@login_required
+def edit_profile(request):
+    if request.method == 'POST':
+        # Initialize the form with POST data and the current user instance
+        user_form = ChangeUserForm(request.POST, instance=request.user)
+        if user_form.is_valid():
+            user = user_form.save(commit=False)
+
+            # Directly update the user object fields from form.cleaned_data
+            user.first_name = user_form.cleaned_data['first_name']
+            user.last_name = user_form.cleaned_data['last_name']
+
+            # Update the password only if a new one is provided
+            if 'password' in user_form.cleaned_data and user_form.cleaned_data['password']:
+                user.set_password(user_form.cleaned_data['password'])
+                update_session_auth_hash(request, user)  # Keep the user logged in
+
+            user.save()
+            messages.success(request, 'Your profile was successfully updated.')
+            return redirect('ratearant:edit_profile')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        # Pre-fill the form with the current user instance on GET requests
+        user_form = ChangeUserForm(instance=request.user)
+
+    return render(request, 'ratearant/edit_profile.html', {'user_form': user_form})
+
+@login_required
+def my_comments(request):
+    comments = Review.objects.all()
+    reviews = []
+    for eachComment in comments:
+        if eachComment.user == request.user:
+            reviews.append(eachComment)
+    return render(request, 'ratearant/my_comments.html', {'comments': reviews})
+
+@login_required
+def delete_comment(request, reviewId):
+    comments = Review.objects.all()
+    for eachComments in comments:
+        if eachComments.reviewId == reviewId and eachComments.user == request.user:
+            eachComments.delete()
+            break
+    return redirect('ratearant:my_comments')  

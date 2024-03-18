@@ -1,0 +1,73 @@
+{% extends 'ratearant/base.html' %}
+
+{% block body_block %}
+<div class="container">
+    <h2>My Comments</h2>
+    <ul>
+        {% for comment in comments %}
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title commentUser">From: {{ comment.restaurant.name }}</h5>
+                    <p>
+                        {{ comment.message }}
+                    </p>
+                    <ul class="list-group customWidth">
+                        <li class="list-group-item">
+                            Food Rating:
+                            {% if comment.foodRating >= 4 %}
+                            <span class="badge badge-primary badge-pill">
+                                {{ comment.foodRating }}
+
+                             {% elif comment.foodRating > 2 %}
+                            <span class="badge badge-warning badge-pill">
+                                {{ comment.foodRating }}
+
+                            {% else %}
+                            <span class="badge badge-danger badge-pill">
+                                {{ comment.foodRating }}
+                            {% endif %}
+                            </span>
+                        </li>
+                        <li class="list-group-item">
+                            Service Rating:
+                            {% if comment.serviceRating >= 4 %}
+                                <span class="badge badge-primary badge-pill">
+                                {{ comment.serviceRating }}
+
+                             {% elif comment.serviceRating > 2 %}
+                            <span class="badge badge-warning badge-pill">
+                                {{ comment.serviceRating }}
+
+                            {% else %}
+                            <span class="badge badge-danger badge-pill">
+                                {{ comment.serviceRating }}
+                            {% endif %}
+                            </span>
+                        </li>
+                        <li class="list-group-item">
+                            Overall Rating:
+                            {% if comment.overallRating >= 4 %}
+                            <span class="badge badge-primary badge-pill">
+                                {{ comment.overallRating }}
+
+                             {% elif comment.overallRating > 2 %}
+                            <span class="badge badge-warning badge-pill">
+                                {{ comment.overallRating }}
+
+                            {% else %}
+                            <span class="badge badge-danger badge-pill">
+                                {{ comment.overallRating }}
+                            {% endif %}
+                            </span>
+                        </li>
+                    </ul>
+                    <br>
+                    <a href="{% url 'ratearant:delete_comment' comment.reviewId %}" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+        {% empty %}
+        <li>No comments to display.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

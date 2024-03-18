@@ -10,12 +10,12 @@
 {% endblock %}
 
 {% block body_block %}
-
+<div class="container">
     <div class="row mb-3">
 
-        <div class="col-md-6">
+        <div class="col-md-7">
             {% if restaurant %}
-                <div class="card" style="width: 50rem;">
+                <div class="card">
                     <img id="restaurantpic" class="card-img-top img-fluid randomRestImage"
                          src=""
                          alt="restaurant picture" >
@@ -28,7 +28,6 @@
                                 <li>Price Range: {{ restaurant.priceRange }}</li>
                                 <li>Opening times: {{ restaurant.openingTime }}</li>
                                 <li>Food style: {{ restaurant.cuisine.cuisineName }}</li>
-
                             </ul>
                         </div>
                     <a href="{% url 'ratearant:home' %}" class="btn btnRed">Back</a>
@@ -36,29 +35,72 @@
                 </div>
 	        {% endif %}
         </div>
-    <div class="col-md-6">
+    <div class="col-md-5">
         {% if restaurant %}
-                <div class="card" style="width: 50rem;">
+            {% for review in reviews %}
+                <div class="card">
                     <div class="card-body">
-                    <h5 class="card-title">Reviews</h5>
-                        {% for review in reviews %}
-                            <ul>
-                                <li>{{ review.message }}</li>
-                                <li>Likes: {{ review.likes }}</li>
-                                <li>Average Score: {{ review.averageScore }}</li>
-                                <li>Food Rating: {{ review.foodRating }}</li>
-                                <li>Service Rating: {{ review.serviceRating }}</li>
-                                <li>Overall Rating: {{ review.overallRating }}</li>
-                            </ul>
-                        {% endfor %}
+                        <h5 class="card-title reviewUser">From: {{ review.user.username }}</h5>
+                            <p>
+                                {{ review.message }}
+                            </p>
+                            <ul class="list-group customWidth">
+                                <li class="list-group-item">
+                                    Food Rating:
+                                    {% if review.foodRating >= 4 %}
+                                    <span class="badge badge-primary badge-pill">
+                                        {{ review.foodRating }}
 
+                                     {% elif review.foodRating > 2 %}
+                                    <span class="badge badge-warning badge-pill">
+                                        {{ review.foodRating }}
+
+                                    {% else %}
+                                    <span class="badge badge-danger badge-pill">
+                                        {{ review.foodRating }}
+                                    {% endif %}
+                                    </span>
+                                </li>
+                                <li class="list-group-item">
+                                    Service Rating:
+                                    {% if review.serviceRating >= 4 %}
+                                        <span class="badge badge-primary badge-pill">
+                                        {{ review.serviceRating }}
+
+                                     {% elif review.serviceRating > 2 %}
+                                    <span class="badge badge-warning badge-pill">
+                                        {{ review.serviceRating }}
+
+                                    {% else %}
+                                    <span class="badge badge-danger badge-pill">
+                                        {{ review.serviceRating }}
+                                    {% endif %}
+                                    </span>
+                                </li>
+                                <li class="list-group-item">
+                                    Overall Rating:
+                                    {% if review.overallRating >= 4 %}
+                                    <span class="badge badge-primary badge-pill">
+                                        {{ review.overallRating }}
+
+                                     {% elif review.overallRating > 2 %}
+                                    <span class="badge badge-warning badge-pill">
+                                        {{ review.overallRating }}
+
+                                    {% else %}
+                                    <span class="badge badge-danger badge-pill">
+                                        {{ review.overallRating }}
+                                    {% endif %}
+                                    </span>
+                                </li>
+                            </ul>
                     </div>
                 </div>
-	        {% endif %}
-
-
-
+                {% endfor  %}
+        {% endif %}
+        </div>
     </div>
-    </div>
+</div>
 <script src="{% static 'ratearant/scripts/randomrantimage.js' %}"></script>
 {% endblock %}
+

@@ -85,3 +85,9 @@ h1 {
     height: auto;
     object-fit: cover;
 }
+.reviewUser{
+    color: #95090d!important;
+}
+.customWidth{
+    max-width: 200px;
+}

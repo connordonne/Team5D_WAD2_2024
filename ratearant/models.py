@@ -26,11 +26,11 @@ class Restaurant(models.Model):
     openingTime = models.CharField(max_length=30)
     priceRange = models.CharField(max_length=16)
     cuisine = models.ForeignKey(Cuisine, on_delete=models.CASCADE)
-    #your_top_rated_restaurants for user
+    # your_top_rated_restaurants for user
     # imgpath=models.CharField(max_length=256)
     slug = models.SlugField(unique=True)
 
-    #Score
+    # Score
     number_of_reviews = models.PositiveIntegerField(default=0)
     average_rating = models.DecimalField(max_digits=3, decimal_places=2, default=0.00)
 
@@ -40,7 +40,6 @@ class Restaurant(models.Model):
 
     def __str__(self):
         return self.name
-
 
 
 # Table for the reviews.
@@ -94,6 +93,7 @@ class UserProfile(models.Model):
     website = models.URLField(blank=True)
     picture = models.ImageField(upload_to='profile_images', blank=True)
     email = models.EmailField(unique=True)
+
     def __str__(self):
         return self.user.username
 
@@ -113,4 +113,3 @@ class YourTopRatedRestaurant(models.Model):
 
     def __str__(self):
         return self.name
-

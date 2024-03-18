@@ -44,10 +44,7 @@ h1 {
     background-color: #95090d;
     padding: 5px;
 }
-.footer{
-    background-color: #95090d;
-    padding: 20px;
-}
+
 #headerVisitedRAR1 a:visited{
     color: aliceblue;
 }
@@ -70,6 +67,9 @@ h1 {
     left: 0;
     bottom: 0;
     width: 100%;
+    background-color: #95090d;
+    padding: 20px;
+
 }
 .randomRestImage{
     max-width: 400px;

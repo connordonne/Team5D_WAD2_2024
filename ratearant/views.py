@@ -150,7 +150,7 @@ def register(request):
 
 
 def trending(request):
-    restaurant_list = Restaurant.objects.order_by('-average_rating')
+    restaurant_list = Restaurant.objects.order_by('-average_rating')[:5]
     fave_restaurant_list = Restaurant.objects.order_by('-number_of_reviews')
 
     context_dict = {'top_message': "Top Rated Restaurants",

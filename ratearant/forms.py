@@ -10,6 +10,15 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('username', 'first_name', 'last_name',
                   'email', 'password')
+        
+class ChangeUserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name',
+                  'password')
 
 class ReviewForm(forms.ModelForm):
     foodRating = forms.IntegerField(label='Food Rating', required=True, max_value=5, min_value=1)

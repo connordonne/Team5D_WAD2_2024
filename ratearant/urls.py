@@ -14,4 +14,7 @@ urlpatterns = [
     path('add_review/<slug:restaurant_name_slug>/', views.add_review, name='add_review'),
     path('food_styles/', views.food_styles, name='food_styles'),
     path('categories/<str:cuisineName>/', views.categories, name='categories'),
+    path('edit_profile/', views.edit_profile, name='edit_profile'),
+    path('my_comments/', views.my_comments, name='my_comments'),
+    path('delete_comment/<int:reviewId>/', views.delete_comment, name='delete_comment'),
 ]

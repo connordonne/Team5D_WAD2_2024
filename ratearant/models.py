@@ -42,18 +42,6 @@ class Restaurant(models.Model):
         return self.name
 
 
-# Table for the user.
-class User(models.Model):
-    userId = models.AutoField(primary_key=True)
-    username = models.CharField(max_length=128, unique=True)
-    password = models.CharField(max_length=256)
-    email = models.EmailField(unique=True)
-    firstName = models.CharField(max_length=128)
-    lastName = models.CharField(max_length=128)
-
-    def __str__(self):
-        return self.username
-
 
 # Table for the reviews.
 class Review(models.Model):
@@ -105,7 +93,7 @@ class UserProfile(models.Model):
     lastName = models.CharField(max_length=128)
     website = models.URLField(blank=True)
     picture = models.ImageField(upload_to='profile_images', blank=True)
-
+    email = models.EmailField(unique=True)
     def __str__(self):
         return self.user.username
 

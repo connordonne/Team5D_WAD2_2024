@@ -641,7 +641,6 @@ def populate():
     add_restaurant(restaurants)
 
 
-
 def add_cuisine(cuisine_type):
     for cuisine in cuisine_type:
         c = Cuisine.objects.get_or_create(cuisineName=cuisine['name'])[0]
@@ -666,6 +665,7 @@ def add_restaurant(restaurants):
         )
 
         print(r.name)
+
 
 if __name__ == '__main__':
     print('Starting RateARant populate script...')

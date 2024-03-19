@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.http import HttpResponseForbidden
+from decimal import Decimal
 
 
 # Create your views here.
@@ -183,7 +184,12 @@ def add_review(request, restaurant_name_slug):
             review.serviceRating = request.POST.get('serviceRating')
             review.overallRating = request.POST.get('overallRating')
             review.averageScore = (int(review.foodRating) + int(review.serviceRating) + int(review.overallRating)) / 3
+
             review.save()
+
+            restaurant.average_rating = (restaurant.average_rating*restaurant.number_of_reviews + Decimal(review.averageScore))/ (restaurant.number_of_reviews + 1)
+            restaurant.number_of_reviews = restaurant.number_of_reviews + 1
+            restaurant.save()
             return redirect('ratearant:show_restaurant', restaurant_name_slug=restaurant.slug)
     else:
         form = ReviewForm()
@@ -236,6 +242,10 @@ def delete_comment(request, reviewId):
     comments = Review.objects.all()
     for eachComments in comments:
         if eachComments.reviewId == reviewId and eachComments.user == request.user:
+            restaurant = eachComments.restaurant
+            restaurant.average_rating = (restaurant.average_rating*restaurant.number_of_reviews-eachComments.overallRating)/(restaurant.number_of_reviews-1)
+            restaurant.number_of_reviews = restaurant.number_of_reviews -1
+            restaurant.save()
             eachComments.delete()
             break
     return redirect('ratearant:my_comments')  

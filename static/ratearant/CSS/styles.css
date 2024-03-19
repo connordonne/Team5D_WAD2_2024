@@ -69,6 +69,16 @@ h1 {
     padding: 20px;
 
 }
+.modalHeader{
+    background-color: #95090d;
+    color: white;
+    padding: 10px;
+}
+.modalButton{
+    background-color: white;
+    color: #95090d;
+
+}
 .randomRestImage{
     max-width: 400px;
     max-height: 600px;

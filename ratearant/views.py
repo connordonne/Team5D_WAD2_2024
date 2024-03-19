@@ -130,6 +130,7 @@ def user_logout(request):
 def register(request):
     registered = False
 
+
     if request.method == 'POST':
         user_form = UserForm(request.POST)
 
@@ -168,6 +169,10 @@ def trending(request):
 @login_required
 def add_review(request, restaurant_name_slug):
     restaurant = Restaurant.objects.get(slug=restaurant_name_slug)
+
+    if Review.objects.filter(user=request.user, restaurant_id=restaurant.restaurantId).exists():
+        return render(request, 'ratearant/add_review.html', {'reviewed': True})
+
     if request.method == 'POST':
         form = ReviewForm(request.POST)
         if form.is_valid():

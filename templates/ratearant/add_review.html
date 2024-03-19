@@ -2,6 +2,14 @@
 {% load static %}
 
 {% block body_block %}
+    {% if reviewed %}
+        <script>
+        $(document).ready(function() {
+        $('#reviewModal').modal('show');  // Show the modal when the page is loaded
+        });
+  </script>
+{% endif %}
+
 <link rel="stylesheet" href="{% static 'ratearant/CSS/styles.css' %}">
 <div class="container">
     <div class="text-center">
@@ -14,4 +22,31 @@
         </form>
     </div>
 </div>
+
+    <div class="modal" id="reviewModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header modalHeader">
+        <h5 class="modal-title">You have already reviewed this restaurant.</h5>
+        <button id="closeButton1" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>To prevent review spamming and fakes, you are not allowed to review a restaurant more than once.</p>
+      </div>
+      <div class="modal-footer modalHeader">
+        <button id="closeButton2" type="button" class="btn modalButton" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <script>
+  $(document).ready(function() {
+    $('#closeButton1,#closeButton2').click(function() {
+      $('#reviewModal').modal('hide');
+      window.location.href = '/ratearant';
+    });
+  });
+</script>
 {% endblock %}

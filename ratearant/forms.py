@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User 
-from ratearant.models import UserProfile, Review
+from ratearant.models import Restaurant, UserProfile, Review
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -29,3 +29,12 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ('foodRating', 'serviceRating', 'overallRating', 'message')
+
+class RestaurantForm(forms.ModelForm):
+    name = forms.CharField(required=True)
+    address = forms.CharField(required=True)
+    phone = forms.CharField(required=True)
+    website = forms.CharField(required=True)
+    class Meta:
+        model = Restaurant
+        fields = ('name', 'address', 'phone', 'website', 'cuisine')

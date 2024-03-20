@@ -76,6 +76,12 @@ h1 {
     width: auto!important;
 }
 
+.btnGreen {
+    background-color: green !important;
+    color: white !important;
+    width: auto!important;
+}
+
 .flexAndCentre {
     display: flex; 
     flex-direction: row; 

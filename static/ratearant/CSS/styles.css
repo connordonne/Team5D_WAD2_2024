@@ -31,7 +31,7 @@ h1 {
     color: green;
 }
 .btn {
-    width: 150px;
+    width: auto!important;
 
 }
 

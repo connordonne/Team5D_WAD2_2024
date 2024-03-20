@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
-from ratearant.forms import UserForm, ReviewForm, ChangeUserForm
+from ratearant.forms import RestaurantForm, UserForm, ReviewForm, ChangeUserForm
 from ratearant.models import Restaurant, Cuisine, Review, Comment
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -255,3 +255,21 @@ def delete_comment(request, reviewId):
             eachComments.delete()
             break
     return redirect('ratearant:my_comments')  
+
+@login_required
+def add_restaurant(request):
+    if request.method == 'POST':
+        form = RestaurantForm(request.POST)
+        if form.is_valid():
+            request.session['form_data'] = request.POST
+            return redirect('ratearant:thank_you')
+    else:
+        form = RestaurantForm()
+    return render(request, 'ratearant/add_restaurant.html', {'form': form})
+
+@login_required
+def thank_you(request):
+    form_data = request.session.get('form_data')
+    if form_data:
+        del request.session['form_data']
+    return render(request, 'ratearant/thank_you.html', {'form_data': form_data})

@@ -29,3 +29,12 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ('foodRating', 'serviceRating', 'overallRating', 'message')
+
+class RestaurantForm(forms.ModelForm):
+    name = forms.CharField(required=True)
+    address = forms.CharField(required=True)
+    phone = forms.CharField(required=True)
+    website = forms.CharField(required=True)
+    class Meta:
+        model = Restaurant
+        fields = ('name', 'address', 'phone', 'website', 'cuisine')

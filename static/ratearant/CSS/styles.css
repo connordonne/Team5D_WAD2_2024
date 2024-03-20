@@ -44,7 +44,7 @@ h1 {
 }
 
 .headerTextGold {
-    color: gold
+    color: gold;
 }
 
 .loginMargin {
@@ -100,7 +100,7 @@ h1 {
     color: green;
 }
 .btn {
-    width: 150px;
+    width: auto!important;
 }
 
 .headerRAR{

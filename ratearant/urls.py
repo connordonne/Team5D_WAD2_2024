@@ -17,4 +17,6 @@ urlpatterns = [
     path('edit_profile/', views.edit_profile, name='edit_profile'),
     path('my_comments/', views.my_comments, name='my_comments'),
     path('delete_comment/<int:reviewId>/', views.delete_comment, name='delete_comment'),
+    path('add_restaurant/', views.add_restaurant, name='add_restaurant'), 
+    path('thank_you/', views.thank_you, name='thank_you'),
 ]

@@ -77,7 +77,8 @@ h1 {
 }
 
 .btnRedChange {
-    background-color: #95090d 
+    background-color: #95090d !important;
+    color: white !important;
 }
 
 .flexAndCentre {

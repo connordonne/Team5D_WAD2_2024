@@ -9,19 +9,19 @@
 
 <link rel="stylesheet" href="{% static 'ratearant/CSS/styles.css' %}"> <!-- don't know why I'm having to add this in order to make line 
                                                                                   20 show up correctly-->
-    <div class="pTextRed" style="text-align: center;">
+    <div class="pTextRedCentred">
         <h4>Login to Rate-A-Rant</h4>
         <form id="login_form" method="post" action="{% url 'ratearant:login' %}">
             {% csrf_token %}
-            <div style="margin-bottom: 20px;">
+            <div class="loginMargin">
                 <img src="{% static 'ratearant/images/ratearanticon.jpeg' %}" id="changeImageLeft" alt="Site icon" style="width: 130px; height: 130px; float: left; margin-left: 100px;"/>
                 Username: <input type="text" name="username" value="" size="30" />
                 <img src="{% static 'ratearant/images/ratearanticon.jpeg' %}" id="changeImageRight" alt="Site icon" style="width: 130px; height: 130px; float: right; margin-right: 100px;"/>
             </div>
-            <div style="margin-bottom: 20px;">
+            <div class="loginMargin">
                 Password: <input type="password" name="password" value="" size="30" />
             </div>
-            <div style="text-align: center; margin-bottom: 20px;"> 
+            <div class="submitCentreMargin"> 
                 <input type="submit" name="submit" value="Submit" class="btn btnRed" style="margin: 0 auto;" />
             </div>
             {% if error_message %}

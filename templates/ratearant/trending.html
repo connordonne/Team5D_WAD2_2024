@@ -9,14 +9,14 @@
 
 <h1>{{ top_message }}</h1>
 
-<div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: center;">
+<div class="flexAndCentre">
 {% if restaurants %}
   {% for restaurant in restaurants %}
       {#  Single Card Template:#}
-      <div class="card" style="width: 18rem; margin: 10px">
+      <div class="card cardSizing">
         <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/af/26/f1/selection-of-food.jpg?w=600&h=400&s=1" class="card-img-top" >
         <div class="card-body">
-          <div style="display: flex; flex-direction: row">
+          <div class="cardTitleDisplay">
             <h5 class="card-title">{{ restaurant.name }}</h5>
           </div>
           <div class="star-rating">
@@ -49,10 +49,10 @@
   {% if restaurants %}
     {% for restaurant in fave_restaurants %}
         {#  Single Card Template:#}
-        <div class="card" style="width: 18rem; margin: 10px">
+        <div class="card cardSizing">
           <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/af/26/f1/selection-of-food.jpg?w=600&h=400&s=1" class="card-img-top" >
           <div class="card-body">
-            <div style="display: flex; flex-direction: row">
+            <div class="cardTitleDisplay">
               <h5 class="card-title">{{ restaurant.name }}</h5>
             </div>
             <div class="star-rating">

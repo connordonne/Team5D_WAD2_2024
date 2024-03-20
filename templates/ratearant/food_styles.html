@@ -6,17 +6,17 @@
 {% endblock %}
 
 {% block body_block %}
-    <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: center;">
+    <div class="flexAndCentre">
     {% for cuisine in cuisines %}
 
         {#  Single Card Template:#}
-        <div class="card" style="width: 18rem; margin: 10px;text-align: center">
+        <div class="card cardSizingCuisines">
             <a href="/ratearant/categories/{{ cuisine.cuisineName }}/">
                 <img href="/ratearant/restaurant/{{ restaurant.slug }}/" src="{% static '/ratearant/images/cuisines/'%}{{ cuisine.cuisineName|lower}}.jpg" class="card-img-top cuisinePic img-fluid" >
             </a>
 
             <div class="card-body">
-                <div style="display: flex; justify-content: center;">
+                <div class="cuisineCard">
                     <h5>{{ cuisine.cuisineName }}</h5>
                 </div>
             </div>

@@ -12,13 +12,62 @@ h1 {
     margin-bottom: 10px;
 }
 
+.textLeft {
+    text-align: left;
+}
+
+.mapPosition {
+    position:relative;
+    width:400px;
+    height:300px;
+}
+
+.cardSizing {
+    width: 18rem; 
+    margin: 10px;
+}
+
+.cardSizingCuisines {
+    width: 18rem; 
+    margin: 10px;
+    text-align: center;
+}
+
 .star {
     max-width: 40%;
     max-height: 40%;
 }
 
+.cardTitleDisplay {
+    display: flex; 
+    flex-direction: row;
+}
+
+.headerTextGold {
+    color: gold;
+}
+
+.loginMargin {
+    margin-bottom: 20px;
+}
+
+.submitCentreMargin {
+    text-align: center; 
+    margin-bottom: 20px; 
+}
+
+.cuisineCard {
+    display: flex; 
+    justify-content: center;
+}
+
 .pTextRed {
     color: #95090d;
+}
+
+.pTextRedCentred {
+    color: #95090d;
+    text-align: center;
 }
 
 .btnRed {
@@ -27,12 +76,31 @@ h1 {
     width: auto!important;
 }
 
+.flexAndCentre {
+    display: flex; 
+    flex-direction: row; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.categoriesCards {
+    border: 2px solid gold; 
+    padding: 10px; 
+    width: 100%; 
+    text-align: center; 
+    margin-bottom: 10px;
+}
+
+.hiddenVisibility {
+    visibility: hidden;
+}
+
 #titleGreen {
     color: green;
 }
 .btn {
     width: auto!important;
-
 }
 
 .headerRAR{

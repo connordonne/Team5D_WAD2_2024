@@ -26,13 +26,13 @@ h1 {
     color: white !important;
     width: auto!important;
 }
-.btnRed h5{
-;}
+
 #titleGreen {
     color: green;
 }
 .btn {
-    width: 100px;
+    width: 150px;
+
 }
 
 .headerRAR{
@@ -98,4 +98,7 @@ h1 {
 }
 .customWidth{
     max-width: 200px;
+}
+button {
+  display: inline-block;
 }

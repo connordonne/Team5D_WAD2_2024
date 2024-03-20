@@ -2,10 +2,10 @@ $(document).ready(function() {
     
     $('.btn-light').hover(
         function() {
-            $(this).addClass('btnGreen');
+            $(this).addClass('btnRed');
         },
         function() {
-            $(this).removeClass('btnGreen');
+            $(this).removeClass('btnRed');
         }
     );
 });

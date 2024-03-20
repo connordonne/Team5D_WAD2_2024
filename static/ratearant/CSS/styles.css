@@ -43,6 +43,10 @@ h1 {
 .headerRAR1{
     background-color: #95090d;
     padding: 5px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 #headerVisitedRAR1 a:visited{
@@ -101,4 +105,12 @@ h1 {
 }
 button {
   display: inline-block;
+}
+.form-field {
+    display: block;
+    margin-bottom: 10px; /* Adjust this value as needed */
+}
+body {
+    margin: 0;
+    padding-top: 200px;
 }

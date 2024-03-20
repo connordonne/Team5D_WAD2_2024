@@ -76,6 +76,11 @@ h1 {
     width: auto!important;
 }
 
+.btnRedChange {
+    background-color: #95090d !important;
+    color: white !important;
+}
+
 .flexAndCentre {
     display: flex; 
     flex-direction: row; 

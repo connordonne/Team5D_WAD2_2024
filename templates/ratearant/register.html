@@ -18,10 +18,13 @@
                 {% csrf_token %}
                 
                 <div style="text-align: left;"> 
+                    <!--<img src="{% static 'ratearant/images/ratearanticon.jpeg' %}" id="changeImageLeft" alt="Site icon" style="width: 130px; height: 130px; float: left; margin-left: 10px;"/>-->
                     {{ user_form.username.label_tag }}{{ user_form.username }}
+                    <!--<img src="{% static 'ratearant/images/ratearanticon.jpeg' %}" id="changeImageRight" alt="Site icon" style="width: 130px; height: 130px; float: right; margin-right: 10px;"/>-->
                     {% if user_form.username.errors %}
                         <div class="error">{{ user_form.username.errors }}</div>
                     {% endif %}
+
                     <br /><br />
 
                     {{ user_form.password.label_tag }}{{ user_form.password }}
@@ -47,12 +50,23 @@
                     {% endfor %}
                 </div>
 
-                <div style="text-align: center;"> 
+                <div class="pTextRed" style="text-align: center;"> 
                     <input type="submit" name="submit" value="Register" class="btn btnRed" style="margin: 0 auto;" />
                 </div>
+
             </form>
+            
+
+            
         {% endif %}
+
+       
     </div>
+
+    
+
+    <script src="{% static 'ratearant/scripts/scriptsTest.js' %}"></script>
+
 {% endblock %}
 
 {% block block_footer %}

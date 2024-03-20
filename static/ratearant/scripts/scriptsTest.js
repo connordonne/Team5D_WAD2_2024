@@ -5,32 +5,46 @@
 // Function to change the image when the button is clicked
 
  
-    var counter = 1;
+var counter = 0;
 
     function changeImageLeft() {
 
-        console.log("hello")
-        
         var imageOne = document.getElementById("changeImageLeft");
+
         if (counter == 0) {
-            imageOne.src = "/static/ratearant/images/ratearanticon.jpeg";
             counter++;
         } else if (counter == 1) {
-            imageOne.src = "/static/ratearant/images/pizza.jpg";
+            imageOne.src = "/static/ratearant/images/cake.jpeg";
             counter++;
         } else if (counter == 2) {
-            imageOne.src = "/static/ratearant/images/pasta.jpg";
             counter++;
         } else if (counter == 3) {
-            imageOne.src = "/static/ratearant/images/pancakes.jpg";
+            imageOne.src = "/static/ratearant/images/curry.jpeg";
             counter++;
         } else if (counter == 4) {
-            imageOne.src = "/static/ratearant/images/rice.jpg";
             counter++; 
-        } else if (counter == 5) {
-            imageOne.src = "/static/ratearant/images/th.jpg";
-            counter = 0;
+        } else if (counter == 5) { 
+            imageOne.src = "/static/ratearant/images/soup.jpeg";
+            counter++;
+        } else if (counter == 6) { 
+            counter++;
+        } else if (counter == 7) { 
+            imageOne.src = "/static/ratearant/images/fajitas.jpeg";
+            counter++;
+        } else if (counter == 8) { 
+            counter++;
+        } else if (counter == 9) { 
+            imageOne.src = "/static/ratearant/images/burger.jpeg";
+            counter++;
+        } else if (counter == 10) { 
+            counter++;
+        } else if (counter == 11) { 
+            imageOne.src = "/static/ratearant/images/bread.jpeg";
+            counter=0;
         }
+        
+        
+        
     }
 
   
@@ -38,29 +52,39 @@
 
     function changeImageRight() {
 
-    
-        var imageOne = document.getElementById("changeImageRight");
+        var imageTwo = document.getElementById("changeImageRight");
+        
         if (index == 0) {
-            imageOne.src = "/static/ratearant/images/ratearanticon.jpeg";
-            index++;
+            imageTwo.src = "/static/ratearant/images/ratatouille.jpeg";
+            index=index+1;
         } else if (index== 1) {
-            imageOne.src = "/static/ratearant/images/pizza.jpg";
             index++;
         } else if (index == 2) {
-            imageOne.src = "/static/ratearant/images/pasta.jpg";
+            imageTwo.src = "/static/ratearant/images/pasta.jpg";
             index++;
         } else if (index == 3) {
-            imageOne.src = "/static/ratearant/images/pancakes.jpg";
             index++;
         } else if (index == 4) {
-            imageOne.src = "/static/ratearant/images/rice.jpg";
-            index++; 
+            imageTwo.src = "/static/ratearant/images/rice.jpg";
+            index++;
         } else if (index == 5) {
-            imageOne.src = "/static/ratearant/images/th.jpg";
-            index = 0;
-        }
+            index++;
+        } else if (index== 6) {
+            imageTwo.src = "/static/ratearant/images/pancakes.jpg";
+            index++;
+        } else if (index== 7) {
+            index++;
+        } else if (index== 8) {
+            imageTwo.src = "/static/ratearant/images/pizza.jpg";
+            index++;
+        } else if (index== 9) {
+            index=index+1;
+        } else if (index== 10) {
+            imageTwo.src = "/static/ratearant/images/th.jpg";
+            index=0;
+        } 
     }
 
-    document.getElementById("changeImageLeft").addEventListener("click", changeImageLeft)
-    document.getElementById("changeImageRight").addEventListener("click", changeImageRight)
+    setInterval(changeImageLeft, 3000);
+    setInterval(changeImageRight, 3000);
 

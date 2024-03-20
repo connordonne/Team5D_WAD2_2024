@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User 
-from ratearant.models import UserProfile, Review
+from ratearant.models import Restaurant, UserProfile, Review
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())

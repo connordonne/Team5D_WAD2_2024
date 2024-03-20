@@ -84,8 +84,12 @@ def show_restaurant(request, restaurant_name_slug):
                         'cuisine': restaurant.cuisine,
                         'reviews': reviews,
                         'reviewed': False,}
-        if Review.objects.filter(user=request.user, restaurant_id=restaurant.restaurantId).exists():
-            context_dict['reviewed'] = True
+        if request.user.is_authenticated:
+            if Review.objects.filter(user=request.user, restaurant_id=restaurant.restaurantId).exists():
+                context_dict['reviewed'] = True
+        else:
+            context_dict['reviewed'] = False
+
 
     except Restaurant.DoesNotExist:
         context_dict['restaurant'] = None

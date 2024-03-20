@@ -42,7 +42,7 @@
                     {{ profile_form.as_p }}
                     {% for field in profile_form %}
                         {% for error in field.errors %}
-                            <div class="error">{{ error }}</div>
+                            <div class="form-field error">{{ error }}</div>
                         {% endfor %}
                     {% endfor %}
                 </div>

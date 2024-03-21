@@ -1,5 +1,5 @@
 
-/* simple css test */
+/* CSS styles */
 
 h1 {
     text-align: center;
@@ -181,7 +181,7 @@ button {
 }
 .form-field {
     display: block;
-    margin-bottom: 10px; /* Adjust this value as needed */
+    margin-bottom: 10px;
 }
 body {
     margin: 0;

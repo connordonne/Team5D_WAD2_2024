@@ -8,6 +8,7 @@ from ratearant.models import Restaurant, Cuisine, Review
 from django.contrib import messages
 from decimal import Decimal
 
+
 # home page
 def home(request):
     # getting the top rated and favourite restaurants
@@ -16,19 +17,21 @@ def home(request):
 
     context_dict = {'top_message': "Top Rated Restaurants",
                     'fave_message': "Favourite Restaurants",
-                    'restaurants': restaurant_list, 
+                    'restaurants': restaurant_list,
                     'fave_restaurants': fave_restaurant_list,
-                    'range': range(1, 6), # number of stars to display
-                    'isHomePage': True, # to display the home page nav bar
+                    'range': range(1, 6),  # number of stars to display
+                    'isHomePage': True,  # to display the home page nav bar
                     }
     return render(request, 'ratearant/home.html', context=context_dict)
+
 
 # about page
 def about(request):
     context_dict = {'message': 'Placeholder for the Team 5D Rate-A-Rant About page',
-                    'isAboutPage': True # to display the about page nav bar
+                    'isAboutPage': True  # to display the about page nav bar
                     }
     return render(request, 'ratearant/about.html', context=context_dict)
+
 
 # food styles page
 def food_styles(request):
@@ -39,9 +42,10 @@ def food_styles(request):
     context_dict = {
         "cuisines": cuisines_list,
         "restaurants": restaurants_list,
-        'range': range(1, 6) # number of stars to display
+        'range': range(1, 6)  # number of stars to display
     }
     return render(request, 'ratearant/food_styles.html', context=context_dict)
+
 
 # categories page
 def categories(request, cuisineName):
@@ -54,7 +58,7 @@ def categories(request, cuisineName):
         context_dict = {
             "cuisine": cuisine,
             "restaurants": restaurants,
-            'range': range(1, 6) # number of stars to display
+            'range': range(1, 6)  # number of stars to display
         }
         # If cuisine does not exist, return an empty list
     except Cuisine.DoesNotExist:
@@ -63,6 +67,7 @@ def categories(request, cuisineName):
             "restaurants": []
         }
     return render(request, 'ratearant/categories.html', context=context_dict)
+
 
 # restaurant page
 def show_restaurant(request, restaurant_name_slug):
@@ -73,7 +78,7 @@ def show_restaurant(request, restaurant_name_slug):
         restaurant = Restaurant.objects.get(slug=restaurant_name_slug)
         # getting the reviews associated with the restaurant
         reviews = Review.objects.filter(restaurant=restaurant)
-        context_dict = {'restaurant': restaurant, 
+        context_dict = {'restaurant': restaurant,
                         'name': restaurant.name,
                         'address': restaurant.address,
                         'phone': restaurant.phone,
@@ -82,7 +87,7 @@ def show_restaurant(request, restaurant_name_slug):
                         'priceRange': restaurant.priceRange,
                         'cuisine': restaurant.cuisine,
                         'reviews': reviews,
-                        'reviewed': False,}
+                        'reviewed': False, }
         if request.user.is_authenticated:
             if Review.objects.filter(user=request.user, restaurant_id=restaurant.restaurantId).exists():
                 context_dict['reviewed'] = True
@@ -133,6 +138,7 @@ def user_logout(request):
     logout(request)
     return redirect('ratearant:home')
 
+
 # User registration page
 def register(request):
     registered = False
@@ -159,6 +165,7 @@ def register(request):
                   context={'user_form': user_form,
                            'registered': registered})
 
+
 # trending page
 def trending(request):
     # getting the top rated and favourite restaurants
@@ -169,9 +176,10 @@ def trending(request):
                     'fave_message': "Favourite Restaurants",
                     'restaurants': restaurant_list,
                     'fave_restaurants': fave_restaurant_list,
-                    'range': range(1, 6) # number of stars to display
+                    'range': range(1, 6)  # number of stars to display
                     }
     return render(request, 'ratearant/trending.html', context=context_dict)
+
 
 # add review page
 @login_required
@@ -194,16 +202,16 @@ def add_review(request, restaurant_name_slug):
             review.overallRating = request.POST.get('overallRating')
             # Calculate the average score
             review.averageScore = (
-                int(review.foodRating) + 
-                int(review.serviceRating) + 
-                int(review.overallRating)
-                ) / 3
+                                          int(review.foodRating) +
+                                          int(review.serviceRating) +
+                                          int(review.overallRating)
+                                  ) / 3
 
             review.save()
 
             # Update the restaurant's average rating and number of reviews
-            restaurant.average_rating = (restaurant.average_rating*restaurant.number_of_reviews + 
-                                         Decimal(review.averageScore))/ (restaurant.number_of_reviews + 1)
+            restaurant.average_rating = (restaurant.average_rating * restaurant.number_of_reviews +
+                                         Decimal(review.averageScore)) / (restaurant.number_of_reviews + 1)
             restaurant.number_of_reviews = restaurant.number_of_reviews + 1
             restaurant.save()
             return redirect('ratearant:show_restaurant', restaurant_name_slug=restaurant.slug)
@@ -216,6 +224,7 @@ def add_review(request, restaurant_name_slug):
         'restaurant': restaurant
     }
     return render(request, 'ratearant/add_review.html', context)
+
 
 # edit profile page
 @login_required
@@ -247,6 +256,7 @@ def edit_profile(request):
 
     return render(request, 'ratearant/edit_profile.html', {'user_form': user_form})
 
+
 # my comments page
 @login_required
 def my_comments(request):
@@ -260,6 +270,7 @@ def my_comments(request):
             reviews.append(eachComment)
     return render(request, 'ratearant/my_comments.html', {'comments': reviews})
 
+
 # delete comment page
 @login_required
 def delete_comment(request, reviewId):
@@ -271,13 +282,16 @@ def delete_comment(request, reviewId):
         if eachComments.reviewId == reviewId and eachComments.user == request.user:
             # updating the restaurant's average rating and number of reviews
             restaurant = eachComments.restaurant
-            restaurant.average_rating = (restaurant.average_rating*restaurant.number_of_reviews-eachComments.overallRating)/(restaurant.number_of_reviews-1)
-            restaurant.number_of_reviews = restaurant.number_of_reviews -1
+            restaurant.average_rating = (
+                                                    restaurant.average_rating * restaurant.number_of_reviews - eachComments.overallRating) / (
+                                                    restaurant.number_of_reviews - 1)
+            restaurant.number_of_reviews = restaurant.number_of_reviews - 1
             restaurant.save()
             # deleting the comment
             eachComments.delete()
             break
-    return redirect('ratearant:my_comments')  
+    return redirect('ratearant:my_comments')
+
 
 # add restaurant page
 @login_required
@@ -301,6 +315,7 @@ def add_restaurant(request):
     else:
         form = RestaurantForm()
     return render(request, 'ratearant/add_restaurant.html', {'form': form})
+
 
 # thank you page
 @login_required

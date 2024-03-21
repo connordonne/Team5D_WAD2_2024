@@ -13,6 +13,7 @@ function loadMapScenario() {
             bounds: map.getBounds(),
             where: searchQuery,
             callback: function (answer, userData) {
+                debugger;
                 map.setView({ bounds: answer.results[0].bestView });
                 var pin = new Microsoft.Maps.Pushpin(answer.results[0].location, {
                     color: 'red', title: name

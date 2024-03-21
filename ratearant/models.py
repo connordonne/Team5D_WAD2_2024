@@ -57,31 +57,6 @@ class Review(models.Model):
     def __str__(self):
         return str(self.reviewId)
 
-
-# Table for the comments on reviews.
-class Comment(models.Model):
-    commentId = models.AutoField(primary_key=True)
-    review = models.ForeignKey(Review, related_name='comments', on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    message = models.TextField()
-    likes = models.IntegerField(default=0)
-
-    def __str__(self):
-        return str(self.reviewId)
-
-
-# Table for the scores given by users.
-class Score(models.Model):
-    review = models.ForeignKey(Review, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    foodRating = models.IntegerField()
-    serviceRating = models.IntegerField()
-    overallRating = models.IntegerField()
-
-    def __str__(self):
-        return self.review
-
-
 # Table for the User Profile
 class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.
@@ -96,20 +71,15 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
-
-
-class TopRatedRestaurant(models.Model):
-    name = models.CharField(max_length=255)
-    image_url = models.URLField()
-
-    def __str__(self):
-        return self.name
-
-
-class YourTopRatedRestaurant(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    image_url = models.URLField()
-
+    
+# Table for the added restaurant by user
+class AddedRestaurant(models.Model):
+    
+    name = models.CharField(max_length=128, unique=True)
+    address = models.CharField(max_length=256)
+    website = models.URLField()
+    phone = models.CharField(max_length=16)
+    cuisine = models.ForeignKey(Cuisine, on_delete=models.CASCADE)
+    
     def __str__(self):
         return self.name

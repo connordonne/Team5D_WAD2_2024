@@ -34,6 +34,7 @@
 
                         <div id='map' class="mapPosition"></div>
                         <div id='restaurantAddress' class="hiddenVisibility">{{ restaurant.address }}</div>
+                        <div id='restaurantName' class="hiddenVisibility">{{ restaurant.name }}</div>
                         <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key=AmW-lS1nYIT1gQDljYAjWAyJ-1dR0owV3ihYbMsoJpxCaBqbB-KiBctCW_3vgSrx&callback=loadMapScenario' async defer></script>
                         {% if user.is_authenticated and not reviewed%}
                             <a href="{% url 'ratearant:add_review' restaurant_name_slug=restaurant.slug %}" class="btn btnRed">Add Review</a>

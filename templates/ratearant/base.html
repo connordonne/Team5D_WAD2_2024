@@ -23,7 +23,9 @@
 
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="{% url 'ratearant:home' %}">
         <img src="{% static 'ratearant/images/ratearanticon.jpeg' %}" alt="Site icon" style="width: 130px; height: 130px;"/>
+        </a>
         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
           <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
         </a>
@@ -65,7 +67,9 @@
 
         <div class="row">
             <div class="col-1">
+                <a href="{% url 'ratearant:home' %}">
                 <img src="{% static 'ratearant/images/ratearanticon.jpeg'%}" class="img-fluid" width="60%" height="60%">
+                </a>
             </div>
             <div class="col-11 d-flex align-items-center justify-content-center">
                 {% if isHomePage %}

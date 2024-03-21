@@ -1,5 +1,6 @@
 function loadMapScenario() {
-    var searchQuery = document.getElementById('restaurantAddress').innerHTML;                    
+    var searchQuery = document.getElementById('restaurantAddress').innerHTML;   
+    var name = document.getElementById('restaurantName').innerHTML;                 
     var map = new Microsoft.Maps.Map(document.getElementById('map'), {
         /* No need to set credentials if already passed in URL */
         center: new Microsoft.Maps.Location(55.860916, -4.251433),
@@ -14,7 +15,7 @@ function loadMapScenario() {
             callback: function (answer, userData) {
                 map.setView({ bounds: answer.results[0].bestView });
                 var pin = new Microsoft.Maps.Pushpin(answer.results[0].location, {
-                    color: 'red'
+                    color: 'red', title: name
                 });
                 map.entities.push(pin);
             }

@@ -23,19 +23,14 @@
 
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <img src="{% static 'ratearant/images/ratearanticon.jpeg' %}" alt="Site icon" style="width: 130px; height: 130px;"/>
+        <img src="{% static 'ratearant/images/ratearanticon.jpeg' %}" alt="Site icon" class="logo"/>
         <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
           <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
         </a>
-            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="{% url 'ratearant:food_styles' %}" class="nav-link px-2" style="color: white"><h2>Food Styles</h2></a></li>
-        <!----->
-        <li><a href="{% url 'ratearant:trending' %}" class="nav-link px-2" style="color: white"><h2>Trending</h2></a></li>
-                {% if not isHomePage %}
-                    <li>
-                    <a href="{% url 'ratearant:home' %}" class="nav-link px-2" style="color: white"><h2>Home</h2></a>
-                </li>
-                {% endif %}
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="{% url 'ratearant:home' %}" class="nav-link px-2 hrefColour"><h2>Home</h2></a></li>
+            <li><a href="{% url 'ratearant:food_styles' %}" class="nav-link px-2 hrefColour"><h2>Cuisines</h2></a></li>
+            <li><a href="{% url 'ratearant:trending' %}" class="nav-link px-2 hrefColour"><h2>Trending</h2></a></li>         
         </ul>
 
         <div class="text-end">
@@ -65,18 +60,10 @@
 
         <div class="row">
             <div class="col-1">
-                <img src="{% static 'ratearant/images/ratearanticon.jpeg'%}" class="img-fluid" width="60%" height="60%">
+                <img src="{% static 'ratearant/images/ratearanticon.jpeg'%}" class="img-fluid logoFooter">
             </div>
             <div class="col-11 d-flex align-items-center justify-content-center">
-                {% if isHomePage %}
-                    <div class="footerLinks mx-2" style="border-right:1px">
-                    <a href="{% url 'ratearant:about' %}" style="color: white"><h3>About</h3></a>
-                    </div>
-                {% elif isAboutPage %}
-                    <div class="footerLinks mx-2">
-                    <a href="{% url 'ratearant:home' %}" style="color: white"><h3>Home</h3></a>
-                    </div>
-                {% else %}
+               
                     <div class="footerLinks col-2">
                         <a href="{% url 'ratearant:about' %}"><h3>About</h3></a>
                     </div>
@@ -84,7 +71,7 @@
                     <div class="footerLinks col-2">
                         <a href="{% url 'ratearant:home' %}"><h3>Home</h3></a>
                     </div>
-                {% endif %}
+             
        {% block block_footer %}
        <script src="{% static 'ratearant/scripts/changeButton.js' %}"></script>
        {% endblock %}

@@ -7,8 +7,14 @@
 
 {% block body_block %}
 
+    <script src="{% static 'ratearant/scripts/scriptsTest.js' %}"></script>
+
     <div class="pTextRedCentred">
-    <p>Welcome to Ratearant. The best place for all of your restaurant rating, reviewing and discovering needs! Search through all the best restaurants and share your own opinions with Ratearant!</p>
+        <div class="imageContainer">
+            <img src="{% static 'ratearant/images/ratearanticon.jpeg' %}" id="changeImageLeft" alt="Site icon" class="sizesForChangeImageLeft"/>
+            <p>Welcome to Ratearant. The best place for all of your restaurant rating, reviewing and discovering needs! Search through all the best restaurants and share your own opinions with Ratearant!</p>
+            <img src="{% static 'ratearant/images/ratearanticon.jpeg' %}" id="changeImageRight" alt="Site icon" class="sizesForChangeImageRight"/>
+        </div>
     </div>
 
 {% endblock %}

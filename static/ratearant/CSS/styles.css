@@ -70,15 +70,62 @@ h1 {
     text-align: center;
 }
 
+.logo {
+    height: 100px;
+    width: 130px;
+    margin-left: 0px;
+}
+
 .btnRed {
     background-color: #95090d !important;
     color: white !important;
     width: auto!important;
+    margin: auto!important;
+}
+
+.btnRedRegister {
+    background-color: #95090d !important;
+    color: white !important;
+    width: auto!important;
+    margin-bottom: 20px;
 }
 
 .btnRedChange {
     background-color: #95090d !important;
     color: white !important;
+}
+
+.imageContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1000px; 
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+
+.hrefColour{
+    color: white;
+}
+
+.logoFooter {
+    width: "60%";
+    height: "60%";
+    margin-left: 30px;
+}
+
+.sizesForChangeImageLeft {
+    width: 130px; 
+    height: 130px; 
+    float: left; 
+    margin-left: 100px;
+}
+
+.sizesForChangeImageRight {
+    width: 130px; 
+    height: 130px; 
+    float: right; 
+    margin-right: 100px;
 }
 
 .flexAndCentre {

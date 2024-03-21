@@ -20,7 +20,10 @@
   {% for restaurant in restaurants %}
       {#  Single Card Template:#}
       <div class="card cardSizing">
-        <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/af/26/f1/selection-of-food.jpg?w=600&h=400&s=1" class="card-img-top" >
+        <img attrrestaurantpic class="card-img-top img-fluid randomRestImage"
+        src=""
+        alt="restaurant picture" 
+        style="height: 250px;">
         <div class="card-body">
           <div class="cardTitleDisplay">
             <h5 class="card-title">{{ restaurant.name }}</h5>
@@ -56,7 +59,10 @@
     {% for restaurant in fave_restaurants %}
         {#  Single Card Template:#}
         <div class="card cardSizing">
-          <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/26/af/26/f1/selection-of-food.jpg?w=600&h=400&s=1" class="card-img-top" >
+          <img attrrestaurantpic class="card-img-top img-fluid randomRestImage"
+        src=""
+        alt="restaurant picture" 
+        style="height: 250px;">
           <div class="card-body">
             <div class="cardTitleDisplay">
               <h5 class="card-title">{{ restaurant.name }}</h5>
@@ -86,6 +92,6 @@
 {% endblock %}
 
 {% block block_footer %}
-
+<script src="{% static 'ratearant/scripts/randomrantimage.js' %}"></script>
 {% endblock %}
 

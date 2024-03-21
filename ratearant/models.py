@@ -57,6 +57,7 @@ class Review(models.Model):
     def __str__(self):
         return str(self.reviewId)
 
+
 # Table for the User Profile
 class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.
@@ -71,15 +72,15 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
-    
+
+
 # Table for the added restaurant by user
 class AddedRestaurant(models.Model):
-    
     name = models.CharField(max_length=128, unique=True)
     address = models.CharField(max_length=256)
     website = models.URLField()
     phone = models.CharField(max_length=16)
     cuisine = models.ForeignKey(Cuisine, on_delete=models.CASCADE)
-    
+
     def __str__(self):
         return self.name

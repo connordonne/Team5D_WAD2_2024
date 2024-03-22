@@ -1,14 +1,16 @@
 {% extends 'ratearant/base.html' %}
+{% load static %}
 
 {% block body_block %}
+
+<link rel="stylesheet" href="{% static 'ratearant/CSS/styles.css' %}">
 <div class="container">
+    
     <h2>Edit Profile</h2>
     <form method="post">
         {% csrf_token %}
-        <!-- Display each form field individually -->
         <div class="mb-3">
             <label for="id_first_name" class="form-label">First name:</label>
-            <!-- Include placeholders and set the value attribute for pre-filling -->
             <input type="text" class="form-control" id="id_first_name" name="first_name" value="{{ user_form.instance.first_name }}" required>
         </div>
         <div class="mb-3">
@@ -36,7 +38,7 @@
         {% endif %}
 
 
-        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <button type="submit" class="btn btnRedRegister">Save Changes</button>
     </form>
 </div>
 {% endblock %}

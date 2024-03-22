@@ -60,7 +60,7 @@ def categories(request, cuisineName):
             "restaurants": restaurants,
             'range': range(1, 6)  # number of stars to display
         }
-        # If cuisine does not exist, return an empty list
+    # If cuisine does not exist, return an empty list
     except Cuisine.DoesNotExist:
         context_dict = {
             "cuisine": None,
@@ -88,6 +88,7 @@ def show_restaurant(request, restaurant_name_slug):
                         'cuisine': restaurant.cuisine,
                         'reviews': reviews,
                         'reviewed': False, }
+        # Check if the user has already reviewed the restaurant
         if request.user.is_authenticated:
             if Review.objects.filter(user=request.user, restaurant_id=restaurant.restaurantId).exists():
                 context_dict['reviewed'] = True
@@ -117,7 +118,7 @@ def login_view(request):
         password = request.POST.get('password')
         # Authenticate the user
         user = authenticate(request, username=username, password=password)
-
+        # Check if the user is valid
         if user is not None:
             if user.is_active:
                 login(request, user)
@@ -155,6 +156,9 @@ def register(request):
             user.last_name = user_form.cleaned_data['last_name']
             user.save()
             registered = True
+
+            # Authenticate the user and login
+            login(request, user)
         else:
             print(user_form.errors)
 
@@ -244,8 +248,8 @@ def edit_profile(request):
             if 'password' in user_form.cleaned_data and user_form.cleaned_data['password']:
                 user.set_password(user_form.cleaned_data['password'])
                 update_session_auth_hash(request, user)  # Keep the user logged in
-
             user.save()
+
             messages.success(request, 'Your profile was successfully updated.')
             return redirect('ratearant:edit_profile')
         else:
@@ -283,8 +287,8 @@ def delete_comment(request, reviewId):
             # updating the restaurant's average rating and number of reviews
             restaurant = eachComments.restaurant
             restaurant.average_rating = (
-                                                    restaurant.average_rating * restaurant.number_of_reviews - eachComments.overallRating) / (
-                                                    restaurant.number_of_reviews - 1)
+                                        restaurant.average_rating * restaurant.number_of_reviews - eachComments.overallRating) / (
+                                        restaurant.number_of_reviews - 1)
             restaurant.number_of_reviews = restaurant.number_of_reviews - 1
             restaurant.save()
             # deleting the comment
@@ -310,6 +314,7 @@ def add_restaurant(request):
             review.website = request.POST.get('website')
             review.cuisine = Cuisine.objects.get(cuisineId=request.POST.get('cuisine'))
             review.save()
+            
             request.session['form_data'] = request.POST
             return redirect('ratearant:thank_you')
     else:

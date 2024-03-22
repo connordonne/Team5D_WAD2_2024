@@ -214,7 +214,7 @@ h1 {
 }
 .cuisinePic{
     max-height: 300px;
-    max-width: 200px;
+
     object-fit: cover;
 }
 .cuisine-image {
